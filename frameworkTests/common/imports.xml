@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<field id="loginInput" ref="loginInput"/>
+	<webelement ref="search" id="search"/>
+	
+	<webelement ref="someTextFromImport" id="someText" action="getText" returnValueName="savedText" />
+	
+	<variable ref="var"/>
+	
+	<frame ref="getTextFromDivAndPutIntoVar"> 
+		<webelement id="someText" action="getText" returnValueName="${var}"/>
+	</frame>
+</imports>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          description="if testcase = parent folder, then tree fail =(" tags="tree">
+
+    <test name="tree check test" description="Если мия тесткейса = имени родительского фолдера, то дерево разбора падает."
+          tags="tree, деревья разбора">
+        <bdd message="Login page"/>
+        <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+        <screenshot/>
+        <snapshot/>
+        <frame>
+            <bdd message="Fill login field"/>
+            <field id="loginInput" textToType="someLogin"/>
+        </frame>
+        <frame>
+            <bdd message="Fill password field"/>
+            <field id="passwordInput" textToType="SomePassword"/>
+        </frame>
+        <frame>
+            <bdd message="Submit login and password"/>
+            <button id="DoLoginBtn"/>
+        </frame>
+    </test>
+  
+</testcase>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd">
+
+    <navigate ref="basicLogin" to="http://localhost:${jetty.port}/test/login.html" />    
+
+    <field ref="loginName" id="loginInput" />
+
+    <field ref="loginPwd" cssSelector="#passwordInput" />
+    
+    <button ref="loginButton" subId="LoginBtn" />
+    
+    <button ref="checkLoginButton" extends="loginButton" action="isExists"/>
+    
+    <webelement ref="logout" id="logoutLink" action="click"></webelement>
+</imports>

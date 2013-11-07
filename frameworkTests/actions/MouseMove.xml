@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines Routines.xsd"
+	tags="mouseMove">
+
+	<test name="Mouse move base check" >
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<button action="isExists" id="search" />
+		<webelement action="mouseMove" id="search" text="120"/>
+		<!-- <pause time="5000"/> -->
+	</test>
+
+
+</testcase>

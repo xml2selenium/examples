@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	description="check before and after status testcase." tags="before, after, M21">
+
+    <before scope="test">
+        <webelement action="noexistBefore"/>
+	</before>
+
+
+    <!--failure-->
+    <test name="failure test" tags="before/after all situations">
+       <webelement id="noexistTest"/>
+    </test>
+
+	<after>
+
+	</after>
+</testcase>

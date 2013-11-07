@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	tags="framework, common, scopes, M11">
+	
+	<test name="Use same elements in different scopes" tags="common, scopes, M11">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+      	
+      	<field ref="loginField" id="loginInput" textToType="login_1"/>
+      	<webelement id="loginInput" action="isContainsText" text="login_1"/>
+      	
+      	<frame>
+      		<field ref="loginField" id="loginInput" textToType="login_2"/>
+      		<webelement id="loginInput" action="isContainsText" text="login_2"/>
+      	</frame>
+	</test>
+	
+	<test name="Use same variables in diferrent scopes" tags="common, scopes, variable, M11">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<variable ref="loginVar" value="login_1"/>
+		<field id="loginInput" textToType="${loginVar}"/>
+		<webelement id="loginInput" action="isContainsText" text="login_1"/>
+		
+		<frame>
+			<variable ref="loginVar" value="login_2"/>
+			<field id="loginInput" textToType="${loginVar}"/>
+			<webelement id="loginInput" action="isContainsText" text="login_2"/>
+		</frame>
+		
+		<field id="loginInput" textToType="${loginVar}"/>
+		<webelement id="loginInput" action="isContainsText" text="login_1"/>
+	</test>
+	
+	<test name="Use variable from test scope into frame scope" tags="common, scopes, variable, M11">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<variable ref="loginVar" value="login_1"/>
+		<variable ref="passwordVar" value="password_1"/>
+		
+		<field id="loginInput" textToType="${loginVar}"/>
+		<webelement id="loginInput" action="isContainsText" text="login_1"/>
+		
+		<frame>
+			<variable ref="loginVar" value="login_2"/>
+			
+			<field id="loginInput" textToType="${loginVar}"/>
+			<field id="passwordInput" textToType="${passwordVar}"/>
+			<webelement id="loginInput" action="isContainsText" text="login_2"/>
+			<webelement id="passwordInput" action="isContainsText" text="password_1"/>
+		</frame>
+	</test>
+	
+	<test name="Use variable from parent frame scope in child frame scope" tags="common, scopes, variable, frame, M11">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<frame ref="EnterLogin">
+			<variable ref="passwordVar" value="password_1"/>
+			<field ref="field" id="loginInput" textToType="login_1"/>
+		</frame>
+		
+		<frame extends="EnterLogin">
+			<field ref="field" id="passwordInput" textToType="${passwordVar}"/>
+		</frame>
+		
+		<webelement id="loginInput" action="isContainsText" text="login_1"/>
+		<webelement id="passwordInput" action="isContainsText" text="password_1"/>
+	</test>
+	
+	<import name="i" resource="Import.xml"/>
+	
+	<test name="Use variable from import scope into test scope" tags="common, scopes, variable, M11">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<field id="loginInput" textToType="${loginField}"/>
+		<webelement id="loginInput" action="isContainsText" text="login_import"/>
+	</test>
+	
+	<test name="Use inner frame variable from import scope into test scope" tags="common, scopes, variable, M11, negative"
+			expected="error" where="errorElement"
+			expectedException="java.lang.IllegalStateException"
+			expectedMessage='Expression "passwordVar" cannot be evaluated. See original exception:'>
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<field ref="errorElement" id="passwordInput" textToType="${passwordVar}"/>
+	</test>
+	
+	<test name="Use variable from import scope in frame. Frame contains in import" tags="common, scopes, import, variable, M11, frame">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		<frame extends="i:enterCredentials"/>
+	</test>
+</testcase>

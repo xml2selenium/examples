@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../../xml2selenium-core/src/main/resources/Routines.xsd ">
+	<frame ref="type_operations">
+		<field id="text${i}" textToType="${i}" />
+	</frame>
+
+	<frame ref="compare_operations">
+		<field id="text${i}" action="getAttribute" text="value"
+			returnValueName="actualText" />
+		<assert first="${actualText}" second="${i}" action="equals" />
+	</frame>
+
+	<frame ref="input_operations">
+		<field extends="${xy}" textToType="${xy}" />
+		<webelement extends="${xy}" action="isExists" />
+		<field extends="${xy}" textToType="!!!!${xy}!!!!" />
+	</frame>
+
+	<frame ref="exist_operations">
+		<webelement extends="${z}" action="isExists" />
+	</frame>
+
+	<frame ref="type_operations_webelements">
+		<field extends="${variable}" textToType="new text ${variable}" />
+	</frame>
+
+
+</imports>

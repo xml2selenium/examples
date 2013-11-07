@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkException"
+	tags="framework, imports, negative, notExistFile">
+	
+    <import resource="NonExistingImport.xml" name="appElements" />
+	<!--
+		ID: 20
+	-->       
+	<test name="Import non-existing file [20]"
+			tags="imports, notExistFile">
+	    <navigate extends="appElements:basicLogin"></navigate>
+        
+        <field extends="appElements:loginName" textToType="someLogin" />
+        <field  extends="appElements:loginPwd" textToType="SomePassword" />
+        <button extends="appElements:checkLoginButton"/>
+        <button extends="appElements:loginButton" />
+
+        <button id="search" />
+        <webelement id="orderItem" action="isExists" />
+	</test>
+</testcase>

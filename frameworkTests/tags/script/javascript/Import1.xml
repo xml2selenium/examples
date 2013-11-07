@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../../xml2selenium-core/src/main/resources/Routines.xsd ">
+
+	<script ref="loginscript">
+		<javascript>
+			document.getElementById('DoLoginBtn').click();
+		</javascript>
+	</script>
+
+	<script ref="regscript">
+		<javascript>
+			document.getElementsByClassName("w150")[0].value= "some";
+			document.getElementsByClassName("w150")[2].value= "some";
+			document.getElementsByClassName("w150")[1].value= 41;
+			document.getElementsByClassName("regbut")[0].click();
+		</javascript>
+	</script>
+
+
+	<frame ref="login_js_frame">
+		<script>
+			<javascript>
+				document.getElementById('DoLoginBtn').click();
+			</javascript>
+		</script>
+	</frame>
+	
+	<frame ref="js_frame">
+		<script>
+			<javascript>
+				document.getElementById('${test_variable}').value="some_text";
+			</javascript>
+		</script>
+	</frame>
+	
+	<frame ref="js_frame2">
+		<script>
+			<javascript>
+				document.getElementById('${test_password}').value="some_text";
+			</javascript>
+		</script>
+	</frame>
+	
+</imports>

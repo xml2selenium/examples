@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><root><TestCase><Test><navigate to="http://localhost:${jetty.port}/test/tinymce.html"/><find id="button"/><click id="button"/><find id="extext"/><find id="extext"/></Test></TestCase></root>

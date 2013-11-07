@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	tags="framework, imports, importLevels">
+	
+	<!-- 
+		Here we use many levels of imports: Import1 imports Import2, Import2 imports Import3, Import 3 imports Import4
+		ID: 15
+	 -->
+    <import resource="Import1.xml" name="appElements" />
+    
+	<test name="Many imports levels [15]"
+			tags="imports">
+	    <navigate extends="appElements:basicLogin"></navigate>
+        
+        <field extends="appElements:loginName" textToType="someLogin" />
+        <field  extends="appElements:loginPwd" textToType="SomePassword" />
+        <button extends="appElements:checkLoginButton"/>
+        <button extends="appElements:loginButton" />
+
+        <button id="search" />
+        <webelement id="orderItem" action="isExists" />
+	</test>
+</testcase>

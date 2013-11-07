@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="Test different languages on page" tags="encoding">
+	<test name="Test russian text on page" description="Test russian text on page" tags="encoding, russian">
+	    <navigate to="http://localhost:${jetty.port}/test/differentLanguages.html"/>
+        <screenshot />
+        <snapshot/>
+        
+        <!-- Check russian text on page -->
+        <webelement id="rusH1" action="isContainsText" text="Русский заголовок" />
+        
+        <webelement id="rusP" action="isContainsText" text="Русский текст" />
+        
+        <field id="loginInput" textToType="имя пользователя"/>
+        <field id="passwordInput" textToType="пароль"/>
+        <screenshot />
+        <snapshot/>
+        
+        <!-- Check that russian text values typed correctly into inputs -->
+        <field id="loginInput" action="isContainsText" text="имя пользователя"/>
+        <field id="passwordInput" action="isContainsText" text="пароль"/>
+        
+        <!-- Find element by xpath with russian value -->
+        <webelement xpath="//p[text()='Русский текст']" action="isExists"/>
+	</test>
+</testcase>

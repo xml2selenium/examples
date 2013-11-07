@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	tags="framework, imports, cyclicImports, negative">
+	
+	<!-- 
+		Import1 imported Import2
+		Import2 imported Import1
+		ID: 18
+	 -->
+    <import resource="Import1.xml" name="appElements" />
+    
+	<test name="Cyclic imports [18]" tags="imports, cyclicImports">
+	    <navigate extends="appElements:basicLogin"></navigate>
+        
+        <field extends="appElements:loginName" textToType="someLogin" />
+        <field  extends="appElements:loginPwd" textToType="SomePassword" />
+        <button extends="appElements:checkLoginButton"/>
+        <button extends="appElements:loginButton" />
+
+        <button id="search" />
+        <webelement id="orderItem" action="isExists" />
+	</test>
+</testcase>

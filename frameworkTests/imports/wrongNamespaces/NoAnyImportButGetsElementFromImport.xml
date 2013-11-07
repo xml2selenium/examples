@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	tags="framework, imports, notExistElement, notExistImport">
+
+	<test name="No any import but gets element from import [50]" 
+			expected="error" where="failElement"
+			expectedException="java.lang.IllegalStateException"
+			expectedMessage="You want to get 'loginField' from import with name 'elements', but import with this namespace not found"
+			tags="imports, negative, notExistElement">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<field ref="loginField" id="loginInput" textToType="asfd"/>	
+		<webelement ref="failElement" extends="elements:loginField" action="isExists"/>
+	</test>
+</testcase>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	tags="framework, imports, negative, notExistElement, M23">
+	
+    <import resource="FirstImport.xml" name="i" />
+	
+	<test name="Import non-existing webelement"
+			tags="imports, notExistElement, M23"
+			expected="error"
+			expectedException="java.lang.IllegalStateException"
+			expectedMessage="Element 'webelement' not found in import 'i'">
+	     <webelement extends="i:webelement" action="isExists" />
+	</test>
+
+	<test name="Import non-existing button"
+			tags="imports, notExistElement, M23"
+			expected="error"
+			expectedException="java.lang.IllegalStateException"
+			expectedMessage="Element 'button' not found in import 'i'">
+	    <button extends="i:button" />
+	</test>
+
+	<test name="Import non-existing field"
+			tags="imports, notExistElement, M23"
+			expected="error"
+			expectedException="java.lang.IllegalStateException"
+			expectedMessage="Element 'field' not found in import 'i'">
+	    <field extends="i:field" textToType="someLogin" />
+	</test>
+
+	<test name="Import non-existing frame"
+			tags="imports, notExistElement, M23"
+			expected="error"
+			expectedException="java.lang.IllegalStateException"
+			expectedMessage="Element 'nonExistFrameFromFirstImport' not found in import 'i'">
+	    <frame extends="i:nonExistFrameFromFirstImport"/>
+	</test>
+	
+	<test name="Import non-existing frame from second import"
+			tags="imports, notExistElement, M23"
+			expected="error"
+			expectedException="java.lang.IllegalStateException"
+			expectedMessage="Element 'nonExistFrameFromSecondImport' not found in import 'i'">
+	    <frame extends="i:frameFromFirstImport1"/>
+	</test>
+	
+	<test name="Import non-existing frame from third import"
+			tags="imports, notExistElement, M23"
+			expected="error"
+			expectedException="java.lang.IllegalStateException"
+			expectedMessage="Element 'nonExistFrameFromThirdImport' not found in import 'i'">
+	    <frame extends="i:frameFromFirstImport2"/>
+	    
+	</test>
+
+	<test name="Import non-existing element in frame from third import"
+			tags="imports, notExistElement, M23"
+			expected="error"
+			expectedException="java.lang.IllegalStateException"
+			expectedMessage="Element 'button' not found in import 'i'">
+	
+		<frame extends="i:frameFromFirstImport3" />
+	</test>
+</testcase>

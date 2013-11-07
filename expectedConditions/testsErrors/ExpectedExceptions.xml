@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	Test-cases for expected exceptions functionality:
+	1. Check expectedException
+	2. Check expectedMessage
+	3. Check, on which element test failed 
+	4. Test expected=fail, success, error
+ -->
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd">
+	<test name="1_Expected_exception_test" expectedException="FrameworkException">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement id="loginInput" action="nonExistsAction"/>
+	</test>
+	
+	<test name="2_Expected_exception_with_full_name_test" expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkException">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement id="loginInput" action="nonExistsAction"/>
+	</test>
+	
+	<test name="3_Expected_exception_test_[wrong_exception]" expectedException=".lang.NullPointerException">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement id="loginInput" action="nonExistsAction"/>
+	</test>	
+	
+	<test name="4_Expected_exception_test_[negative]" expectedException="FrameworkException" description="We expected exception, but no exception was thrown">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement id="loginInput" action="isDisplayed"/>
+	</test>
+	
+	<test name="5_Expected_message_test" expectedMessage="Unknown action [nonExistsAction] for element Webelement">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement id="loginInput" action="nonExistsAction"/>
+	</test>
+
+	<test name="6_Expected_message_test_[negative]" expectedMessage="some message">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement id="loginInput" action="isDisplayed"/>
+	</test>
+	
+	<test name="7_Expected_result_test" expected="error">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement id="loginInput" action="nonExistsAction"/>
+	</test>
+	
+	<test name="8_Expected_result_test_[negative]" expected="fail" description="We expected fail, but test executes with success result">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement id="loginInput" action="isDisplayed"/>
+	</test>
+	
+	<test name="9_Expected_result_on_specified_element_without_expected_result_for_test_[negative]" where="fail1">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement id="loginInput" action="isDisplayed"/>
+	</test>
+	 
+	<test name="10_Expected_result_on_non_element_without_ref_[negative]" expected="error" where="fail1">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement id="loginInput" action="nonExistsAction"/>
+	</test>
+
+	<test name="11_Expected_error_on_concrete_correct_element" expected="error" where="fail1">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>
+	
+	<test name="12_Expected_result_on_non_expected_element_[negative]" expected="error" where="fail1">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail2" id="loginInput" action="nonExistsAction"/>
+	</test>
+	
+	<test name="13_Expected_non_expected_result_on_non_expected_element_[negative]" expected="error" where="fail1">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail2" id="loginInput" action="nonExistsAction"/>
+	</test>
+	
+	<test name="14_Expected_conrete_result_on_concrete_element" expected="error" where="fail1">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>
+	
+	<test name="15_Expected_expected_expectedException" expected="error" expectedException="FrameworkException">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>
+	
+	<test name="16_Expected_expected_expectedMessage" expected="error" expectedMessage="Unknown action [nonExistsAction] for element Webelement">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>	
+	
+	<test name="17_Expected_expected_expectedException_expectedMessage" expected="error" expectedMessage="Unknown action [nonExistsAction] for element Webelement" expectedException="FrameworkException">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>		
+	
+	<test name="18_Expected_expected_where_expectedException_expectedMessage" expected="error" expectedMessage="Unknown action [nonExistsAction] for element Webelement" expectedException="FrameworkException" where="fail1">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>		
+</testcase>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<navigate ref="nav1" to="http://localhost:${jetty.port}/test/login.html" />
+
+<navigate ref="unfilled_nav" to="" />
+
+<navigate ref="ssl" to="https://failurl" />
+
+<navigate ref="404" to="http://failurl404" />
+
+<navigate ref="404onServer" to="http://localhost:${jetty.port}/test/404.html" />
+
+<navigate ref="file" to="file:////noexistpath/file/protocol/not/valid" />
+</imports>

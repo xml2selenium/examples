@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../xml2selenium-plugin-tag/xml2selenium-base-tag/src/main/resources/xml2selenium.xsd"
+	tags="base, imports, inheritance, expressions">
+	
+    <import resource="CommonFrames.xml" name="appFrames"></import>
+    <import resource="CommonElements.xml" name="appElements" />
+    
+	<test name="Test return element value to variable" tags="expressions, imports, inheritance, coverage" coverage="100">
+        <!--  
+            Framework is able to resolve groovy expressions in "text" attributes (like id, 
+            cssSelector and so on..)   
+        -->
+        <navigate extends="appElements:basicLogin"></navigate>
+        <screenshot />
+        <snapshot/>
+        <frame extends="appFrames:AppLogin"></frame>
+
+        <webelement id="loginLink" action="getText" returnValueName="savedPage"/>
+        
+        <!-- inline value of variable into attribute 'to'. In result it will looks like 
+            that (assuming savedId = "coolId_of_element"):
+            "http://localhost/special_page_coolId_of_element"
+         -->
+        <navigate to="http://localhost:${jetty.port}/test/${savedPage}" />
+
+		<webelement extends="appElements:loginName" action="isDisplayed" />
+		<screenshot />
+		<snapshot/>
+	</test>
+</testcase>

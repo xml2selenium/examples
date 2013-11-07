@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="Test case for validation with wrong tag name" tags="validation">
+	<test name="Wrong tag name" description="Checks validation message if we have wrong tag name" tags="validation">
+	    <navigate1 to="http://localhost:${jetty.port}/test/login.html"/>
+        <field id="loginInput" textToType="someLogin"/>
+	</test>
+</testcase>

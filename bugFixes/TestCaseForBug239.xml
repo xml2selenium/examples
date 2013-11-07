@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	description="Basic test case" tags="base, simple">
+
+	<before scope="test">
+		<navigate to=" http://localhost:${jetty.port}/test/login.html" />
+	</before>
+
+	<test name="1_" tags="after">
+		<bdd message="Login page" />
+	</test>
+
+	<after>
+		<webelement id="tratata" action="isExists" />
+	</after>
+
+	<test name="Simple test" description="Simple test for testing base framework functions"
+		tags="simple">
+		<bdd message="Login page" />
+	</test>
+
+</testcase>

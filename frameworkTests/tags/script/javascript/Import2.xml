@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../../xml2selenium-core/src/main/resources/Routines.xsd ">
+
+	<import name="import" resource="frameworkTests/tags/script/javascript/Import1.xml" />
+
+	<script ref ="loginscript" extends="import:loginscript">
+		<javascript>
+			document.getElementById('DoLoginBtn').click();
+		</javascript>
+	</script>
+</imports>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	description="Test for element message functionality" tags="elementMessage">
+
+	<test name="Webdriver didn`t find field element" tags="elementMessage"
+		expectedMessage="Can`t find element with id loginInput1">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<field id="loginInput1" message="Can`t find element with id loginInput1" />
+	</test>
+
+	<test name="Webdriver didn`t find checkbox element" tags="elementMessage"
+		expectedMessage="Can`t find element with id checkboxId10">
+		<navigate to="http://localhost:${jetty.port}/test/checkbox.html" />
+		<checkbox id="checkboxId10" message="Can`t find element with id checkboxId10" />
+	</test>
+
+	<test name="Webdriver didn`t find button element" tags="elementMessage"
+		expectedMessage="Can`t find element with id button">
+		<navigate to="http://localhost:${jetty.port}/test/checkbox.html" />
+		<button id="button" message="Can`t find element with id button" />
+	</test>
+	
+	<test name="Webdriver didn`t find webElement element" tags="elementMessage"
+		expectedMessage="Element with 'id=element1' is not exists">
+		<navigate to="http://localhost:${jetty.port}/test/checkbox.html" />
+		<webelement id="element1" message="Element is not exists" />
+	</test>
+
+	<test name="Assertion failed" tags="elementMessage" expectedMessage="checkbox is disabled">
+		<navigate to="http://localhost:${jetty.port}/test/checkbox.html" />
+		<checkbox id="checkboxId1" action="isEnabled" message="checkbox is disabled" />
+	</test>
+
+	<test name="Wrong action name in checkbox" tags="elementMessage"
+		expectedMessage="Action with name wrongAction is not available in checkbox">
+		<navigate to="http://localhost:${jetty.port}/test/checkbox.html" />
+		<checkbox id="checkboxId1" action="wrongAction"
+			message="Action with name wrongAction is not available in checkbox" />
+	</test>
+	
+	<test name="Wrong action name in button" tags="elementMessage"
+		expectedMessage="Action with name wrongAction is not available in button">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<button id="DoLoginBtn" action="wrongAction"
+			message="Action with name wrongAction is not available in button" />
+	</test>
+</testcase>

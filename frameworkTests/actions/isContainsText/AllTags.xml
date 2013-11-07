@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines Routines.xsd"
+	tags="framework, imports, alltags">
+
+	<import name="elements" resource="Import.xml" />
+	<!-- 
+		check that specific text exists on page 
+		ID: ?
+	-->
+	<test name="Check specifed text exists on page" tags="isContainsText">
+		<frame extends="elements:searchItems" />
+		<webelement xpath="//*[@id='searchResults']/table/tbody/tr[2]/td[2]" action="isContainsText" text="itm001" ref="firstTableCell" />
+	</test>	
+	
+	<test name="Check inheritance and is we don't expect text, but it exists"
+		expected="fail"
+		expectedException="java.lang.AssertionError"
+		expectedMessage="Element with 'xpath=//*[@id='searchResults']/table/tbody/tr[2]/td[2]' contains text 'itm001"
+		where="lastElement"
+		tags="inheritance, isNotContainsText, negative">
+		<frame extends="elements:searchItems" />
+		
+		<webelement text="itm001" extends="elements:firstTableCell" ref="cell" />
+		
+		<!-- Check inheritance -->
+		<webelement extends="cell" action="isNotContainsText" ref="lastElement" />
+	</test>
+	
+	<test name="Check specifed text exists on page [variables in text attribute]"
+		tags="isContainsText, variables">
+		<frame extends="elements:searchItems" />
+		
+		<variable ref="text" value="itm001" />
+		<!-- Check inheritance -->
+		<webelement extends="elements:firstTableCell" text="${text}" />
+	</test>	
+	
+	<test name="Check message if we expected text on page, but it is not exist"
+		expected="fail"
+		expectedException="java.lang.AssertionError"
+		expectedMessage="Element with 'xpath=//*[@id='searchResults']/table/tbody/tr[2]/td[2]' not contains text 'notExistText'"
+		where="lastElement"
+		tags="isContainsText, negative">
+		<frame extends="elements:searchItems" />
+		
+		<!-- Check inheritance -->
+		<webelement extends="elements:firstTableCell" action="isContainsText" ref="lastElement" text="notExistText" />
+	</test>
+	
+	<test name="Check text on button [75]" 
+			tags="button, isContainsText">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<button subId="LoginBtn" action="isContainsText" text="Login, please"/>
+	</test>	
+</testcase>

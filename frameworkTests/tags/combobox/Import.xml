@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd">
+
+	<navigate ref="demoReg"
+		to="http://localhost:${jetty.port}/test/reg_page.htm" />
+
+	<field ref="email" xpath="//input[@id='email']" />
+	<field ref="password" xpath="//input[@id='password']" />
+	<button ref="regbut"
+		xpath="//form[@id='regist_form' and @class='reg_info']/div[@class='registr_block']/p[1][@class='yellow_but']/a/input" />
+
+	<frame ref="Reg">
+		<field extends="email" textToType="4321432@antalika.com" />
+		<field extends="password" textToType="1fds23123" />
+		<combobox id="city_name" by="value" value="49" />
+		<button extends="regbut" />
+		<webelement
+			xpath="//*[@id='block_info']/div[2]/div/a/img"
+			action="isExists" />
+	</frame>
+</imports>

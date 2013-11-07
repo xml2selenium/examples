@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../xml2selenium-plugin-tag/xml2selenium-base-tag/src/main/resources/xml2selenium.xsd"
+	description="TestCase for bdd testing" tags="bdd">
+
+	<test name="Open page and fill loginInput" description="" tags="bdd">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<bdd message="Fill login field" />
+		<frame>
+			<field id="loginInput" textToType="someLogin" />
+		</frame>
+	</test>
+
+	<test name="Login into system" description="" tags="bdd">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<frame>
+			<bdd message="FILL LOGIN FIELD" />
+			<frame>
+				<field id="loginInput" textToType="someLogin" />
+			</frame>
+		</frame>
+		<bdd message="Fill password field" />
+		<field id="passwordInput" textToType="somePassword" />
+		<frame>
+			<bdd message="Submit login and password" />
+			<button id="DoLoginBtn" action="click" />
+		</frame>
+	</test>
+</testcase>

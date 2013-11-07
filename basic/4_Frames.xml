@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../xml2selenium-plugin-tag/xml2selenium-base-tag/src/main/resources/xml2selenium.xsd"
+	tags="base, inheritance, imports, frames">
+	
+    <import resource="CommonFrames.xml" name="appFrames" />
+    <import resource="CommonElements.xml" name="appElements" />
+    
+	<test name="Test basic frames" tags="inheritance coverage, frames" coverage="50">
+        <!--  
+            Again all efforts applied to war with copypaste. What about of reuse not only one element,
+            but set of elements (steps) logically combined by one idea? We calls such sets - '<frame>'.
+            
+            Could be it is not the best naming (because of overcrossing with html meaning of 'frame'), but
+            for now we have only that. Propose the better one and we will discuss about that!
+            
+            So, Frames.. 
+             - They could contain any elements which can be used inside test case (even frames
+            as sub elements). 
+             - They have 'extends' attribute to inherit attributes and sub elements of parent
+            frame.
+             - There are special rules for inheritance and overriding of children of frame. 
+              1) Child frame inherits all sub elements from parent.
+              2) To override attributes of certain sub-element child frame should define
+                own sub-element with the same 'ref' like required sub-element from parent have.
+              3) It's impossible to add one more sub-element into child frame. 
+              4) Attribute 'extends' in sub-elements of child frame is ignored. I.e. only sub-elements
+                of parent frame can extends from 'outside' elements.
+              5) Value of 'ref' attribute in sub-elements of frame must be unique in scope of this frame.
+                i.e. different frames can contain elements with the same 'ref'.
+              6) Sub-element of frame can be referred only in child frames.  
+                
+        -->
+        
+        
+        <navigate extends="appElements:basicLogin"></navigate>
+        <screenshot />
+        <snapshot/>
+        <!-- Current frame takes all sub elements of AppLogin frame in appFrames import. 
+             They will be executed in the same way like if they was defined here, in this frame. -->
+        <frame extends="appFrames:AppLogin"></frame>
+        
+        <webelement extends="appElements:logout"/>
+        
+        
+        <!-- Follow the chain of extensions: that frame <- ManagerLogin <- CommonLoginFrame. As result
+            current frame will contain next elements:
+
+		        <field ref="loginField" id="loginInput" textToType="manager1" />
+		        <field ref="pwdField" id="passwordInput" textToType="managerpwd" />
+		        <button ref="submitBtn" subId="LoginBtn" extends="appElements:loginButton" />            
+
+            Check, how ManagerLogin overrides field elements from CommonLoginFrame.
+              -->
+        <frame extends="appFrames:ManagerLogin" ></frame>
+        
+        <webelement extends="appElements:logout"/>
+        
+        
+        <!-- Let's override some sub-elements of parent frame right here. 
+             Now field with ref 'pwdField' has new value. All other fields will be included into this
+             frame with old values of attributes.
+             -->
+        <frame extends="appFrames:DirectorLogin">
+            <field ref="pwdField" id="passwordInput" textToType="newDirPass"></field>
+        </frame>
+        <screenshot />
+        <snapshot/>
+	</test>
+</testcase>

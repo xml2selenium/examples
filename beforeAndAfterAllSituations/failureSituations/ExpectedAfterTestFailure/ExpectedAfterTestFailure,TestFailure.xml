@@ -1,0 +1,16 @@
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	description="check before and after status testcase. Реализовано как в Junit, before и after игнорирует expected" tags="before, after, M21">
+
+	<before scope="test">
+
+	</before>
+
+    <!--failure-->
+    <test name="failure test" tags="before/after all situations" expected="fail">
+       <webelement id="noexistTest"/>
+    </test>
+
+	<after>
+        <webelement id="noexistAfter"/>
+	</after>
+</testcase>

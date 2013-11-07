@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../../xml2selenium-core/src/main/resources/Routines.xsd"
+	tags="framework, Pause">
+
+	<test name="Creating pause" tags="Pause">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<pause time="5281" />
+		<button id="DoLoginBtn" />
+		<pause time="3500" />
+	</test>
+
+	<test name="Creating pause with variable" tags="Pause">
+		<variable ref="var1" value="5281" />
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<pause time="${var1}" />
+		<button id="DoLoginBtn" />
+		<pause time="3500" />
+	</test>
+	
+	<test name="Creating pause, but value in argument time is not a number" tags="Pause" expectedException="FrameworkException" expectedMessage="Cannot convert value 'text1' to long!">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<pause time="text1" />
+		<button id="DoLoginBtn" />
+		<pause time="3500" />
+	</test>
+
+	<test name="Creating pause with variable, but variable haven't number" tags="Pause" expectedException="FrameworkException" expectedMessage="Cannot convert value 'notanumber' to long!">
+		<variable ref="var1" value="notanumber" />
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<pause time="${var1}" />
+		<button id="DoLoginBtn" />
+		<pause time="3500" />
+	</test>
+	
+	<test name="Creating pause, but value in argument time is not integer" tags="Pause" expectedException="FrameworkException" expectedMessage="Cannot convert value '3.14' to long!">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<pause time="3.14" />
+		<button id="DoLoginBtn" />
+		<pause time="3500" />
+	</test>
+</testcase>

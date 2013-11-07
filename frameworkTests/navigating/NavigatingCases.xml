@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	Checking different with navigating pages 
+ -->
+
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	tags="framework, navigate">
+	
+	<!-- 
+		Wait for page load after navigating
+		ID: 9
+	 -->
+	<test name="Wait for page load after navigating [9]" 
+		expected="error" where="failElement"
+		expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkWebDriverException"
+		expectedMessage="Can not find element on web page by id=loginInput"
+		tags="navigate, negative, notExistElement">
+		<!-- 1. Go to login page, make some activities here -->
+	    <navigate to="http://localhost:${jetty.port}/test/login.html"></navigate>
+        
+        <field id="loginInput" textToType="someLogin"/>
+        <field id="passwordInput" textToType="SomePassword"/>
+        <button id="DoLoginBtn" />
+        
+        <!-- Now we are logged in and we must not able to do smth with login page elements -->
+        <field id="loginInput" ref="failElement" textToType="someLogin" />
+        <field id="passwordInput" textToType="SomePassword"/>
+	</test>
+</testcase>

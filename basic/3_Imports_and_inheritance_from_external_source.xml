@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../xml2selenium-plugin-tag/xml2selenium-base-tag/src/main/resources/xml2selenium.xsd"
+          tags="base, inheritance, imports">
+
+    <import resource="CommonElements.xml" name="appElements"/>
+
+    <test name="Check impors and inheritance" tags="inheritance, imports">
+        <!--  Sometimes we want to not copypaste, but reuse common elements between
+        different test cases. Goooood neeeews! Now it is possible to define external xml file which will contain
+        such shared elements. Xml file with imports  must contain '<imports>' tag which enclose definition of any 
+        element which could be used inside usual test case. All elements defined in import must have non empty
+        'ref' attributes.
+        
+        To reuse elements defined in external imports there is a tag '<import/>' which allows to specify file name
+        (relative or absolute) and alias - attribute 'name'. Value of 
+        attribute 'name' should be used as scope in extends='scope:parentRef' of child elements defined in the same
+        test case where import is used.
+        
+        All elements inside '<import>' could be children of other elements - defined in the same '<import>', 
+        or imported from another external source. There is possible to use more than one <import>. 
+        It allows to create trees of documents with logical separation of elements.
+        
+        -->
+
+
+        <!-- Next elements are getting attributes from parents which are originally defined at 
+            'src/test/resources/examples/xml/basic/CommonElements.xml'
+         -->
+
+        <navigate extends="appElements:basicLogin"></navigate>
+        <screenshot/>
+        <snapshot/>
+        <field extends="appElements:loginName" textToType="someLogin"/>
+        <field extends="appElements:loginPwd" textToType="SomePassword"/>
+
+        <!-- This button extends button with ref 'checkLoginButton' which extends
+            loginButton and overrides default action from 'click' to 'ensure is element
+            exists'.
+            (Note, this is not guide "how to write perfect test cases, but just
+            an example of usage imports. Selenium do check "is element exists" by default
+            before clicking, typing, etc..). -->
+        <button extends="appElements:checkLoginButton"/>
+
+        <button extends="appElements:loginButton"/>
+
+        <button id="search"></button>
+        <webelement id="orderItem" action="isExists"/>
+        <screenshot/>
+        <snapshot/>
+    </test>
+</testcase>

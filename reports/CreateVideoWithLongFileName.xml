@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          description="В этом тесткейсе должно запуститься 3 теста. Тест с длинным именем не должен иметь артифактов,
+          кроме лога, и должен иметь исключение о слишком длинном имени (ТОЛЬКО WINDOWS) ">
+
+    <test name="failure" tags="before, M24">
+        <video action="stop"/>
+    </test>
+
+    <test name="Create test witn very very long filename and full path for video is over the limit for Windows, that track down the problem with xuggle. Maximum length for a path of video file is defined as 260 characters."
+          description="Test for create video with long name. In Windows result Success, in Linux result Fail."
+          tags="video, M24, long">
+        <video action="start"/>
+        <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+        <video action="stop"/>
+    </test>
+
+    <test name="success" tags="before, M24"></test>
+
+</testcase>

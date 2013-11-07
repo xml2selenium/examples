@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd">
+
+	<frame ref="testRussianPage">
+		<screenshot />
+        <snapshot/>
+        
+        <!-- Check russian text on page -->
+        <webelement id="rusH1" action="isContainsText" text="Русский заголовок" />
+        
+        <webelement id="rusP" action="isContainsText" text="Русский текст" />
+        
+        <field id="loginInput" textToType="имя пользователя"/>
+        <field id="passwordInput" textToType="пароль"/>
+        <screenshot />
+        <snapshot/>
+        
+        <!-- Check that russian text values typed correctly into inputs -->
+        <field id="loginInput" action="isContainsText" text="имя пользователя"/>
+        <field id="passwordInput" action="isContainsText" text="пароль"/>
+        
+        <!-- Find element by xpath with russian value -->
+        <webelement xpath="//p[text()='Русский текст']" action="isExists"/>
+	</frame>
+	
+	<frame ref="testGermanPage">
+		<screenshot />
+        <snapshot/>
+        
+        <!-- Check russian text on page -->
+        <webelement id="deH1" action="isContainsText" text="Deutsch Titel" />
+        
+        <webelement id="deP" action="isContainsText" text="Normalerweise Testanrufe für so wenig Zeit, aber das größte Maß an Flexibilität." />
+        
+        <field id="loginInput" textToType="größte Maß an Flexibilität"/>
+        <field id="passwordInput" textToType="für so wenig Zeit, aber das größte Maß"/>
+        <screenshot />
+        <snapshot/>
+        
+        <!-- Check that russian text values typed correctly into inputs -->
+        <field id="loginInput" action="isContainsText" text="größte Maß an Flexibilität"/>
+        <field id="passwordInput" action="isContainsText" text="für so wenig Zeit, aber das größte Maß"/>
+        
+        <!-- Find element by xpath with russian value -->
+        <webelement xpath="//p[text()='Aber das größte Maß an Flexibilität']" action="isExists"/>
+	</frame>	
+</imports>

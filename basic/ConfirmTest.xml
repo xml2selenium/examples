@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../xml2selenium-plugin-tag/xml2selenium-base-tag/src/main/resources/xml2selenium.xsd"
+          tags="base, javascript, confirm">
+     
+    <import resource="ConfirmFrame.xml" name="confirmFrame"/>
+          
+    <test name="Test basic confirm true" tags="base, javascript, confirm, expected" coverage="30">
+
+        <navigate to="http://localhost:${jetty.port}/test/alertPage.html"/>
+        <webelement id='booleanText' action="isContainsText" text="false"/>
+        
+        <!--override function confirm, default return true-->       
+       <!-- <frame extends="confirmFrame:returnTrue"/>-->
+
+        <webelement id="confirm" action="click" showAlert="true"/>
+        <dialog action="accept"/>
+        <webelement id='booleanText' action="isContainsText" text="true"/>
+    </test>
+
+    <test name="Test basic confirm false" tags="base, javascript, confirm, expected, coverage" coverage="90">
+
+        <navigate to="http://localhost:${jetty.port}/test/alertPage.html"/>
+        <webelement id='booleanText' action="isContainsText" text="false"/>
+        
+        <!--override function confirm, default return false-->        
+       <!-- <frame extends="confirmFrame:returnFalse"/>-->
+
+        <webelement id="confirm" action="click" showAlert="true"/>
+        <dialog action="dismiss"/>
+        <webelement id='booleanText' action="isContainsText" text="false"/>
+    </test>
+</testcase>

@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><root><TestCase><navigate to="http://localhost:${jetty.port}/test/iterate.html"/><Test><find id="text1"/><change from="" id="text1" to="1"/><find id="text2"/><change from="" id="text2" to="2"/><find id="text3"/><change from="" id="text3" to="3"/><find id="text4"/><change from="" id="text4" to="4"/></Test></TestCase></root>

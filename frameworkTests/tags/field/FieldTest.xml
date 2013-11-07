@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../../xml2selenium-core/src/main/resources/Routines.xsd">
+
+	<import name="elements"
+		resource="frameworkTests/tags/field/ImportField.xml" />
+         
+     <!-- Now not work -->
+<!-- 	<test name="FillWithoutClearFromImport" tags="field"> -->
+<!-- 		<navigate to="http://localhost:${jetty.port}/test/" /> -->
+<!-- 		<field extends="elements:login" /> -->
+<!--         <field extends="elements:login" /> -->
+<!--         <field extends="elements:login" action="isContainsText" text="1234512345" /> -->
+<!-- 	</test> -->
+    
+    <test name="FillWithtClear" tags="field">
+        <navigate to="http://localhost:${jetty.port}/test/"/>
+        <field id="loginInput" ref="login" textToType="password"/>
+        <field extends="login" action="isContainsText" text="password"/>
+        <field extends="login" />
+        <field extends="login" action="isNotContainsText" text="passwordpassword"/>
+        <field extends="login" clearOldText="false"/>
+        <field extends="login"/>
+        <field extends="login" action="isContainsText" text="password"/>
+        <field extends="login" action="isNotContainsText" text="passwordpassword"/>
+    </test>
+</testcase>
+	

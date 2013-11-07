@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../xml2selenium-core/src/main/resources/Routines.xsd"
+          tags="framework, javaScript">
+
+    <import resource="frameworkTests/tinymce/TinyMceFrame.xml" name="tinyMceFrame"/>
+    <!--  This test is using xml2selenium-helper-lib dependecy with tinymce frame  -->
+    <test name="Test TinyMce Frame html"
+          tags="Script, tinnyMce, JavaScript">
+        <navigate to="http://localhost:${jetty.port}/test/tinymce.html"/>
+        <frame extends="tinyMceFrame:putText"/>
+        <button id="button" action="click"/>
+        <webelement id='extext' action="isContainsText" text="some text 1"/>
+    </test>
+</testcase>

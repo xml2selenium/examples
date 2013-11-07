@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	description="Use default scope for variables in Before tag" tags="framework, before, variable">
+	
+	<import name="i" resource="Import.xml"/>
+	
+	<before extends="i:beforeWithDefaultScope"/>
+	
+	<test name="Use variable from Before tag. Test1" tags="before, variable, negative"
+			expected="error" where="errorElement"
+			expectedException="java.lang.IllegalStateException"
+			expectedMessage='Expression "loginVar" cannot be evaluated. See original exception'> 
+		<navigate to="http://localhost:${jetty.port}/test"/>	
+		<field ref="errorElement" id="loginInput" textToType="${loginVar}"/>
+	</test>
+	
+	<test name="Use variable from Before tag. Test2" tags="before, variable, negative"
+			expected="error" where="errorElement"
+			expectedException="java.lang.IllegalStateException"
+			expectedMessage='Expression "loginVar" cannot be evaluated. See original exception'> 
+		<navigate to="http://localhost:${jetty.port}/test"/>	
+		<field ref="errorElement" id="loginInput" textToType="${loginVar}"/>
+	</test>
+</testcase>

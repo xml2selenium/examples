@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../xml2selenium-core/src/main/resources/Routines.xsd"
+	tags="framework, javaScript">
+	
+	<import name="import1" resource="frameworkTests/tags/script/javascript/Import1.xml" />
+	<import name="import2" resource="frameworkTests/tags/script/javascript/Import2.xml" />
+	<test
+		name="Use Tag Script with action JavaScript to click on LoginButton from frame"
+		tags="Script, button, JavaScript, M11">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<script>
+			<javascript>
+				document.getElementById('DoLoginBtn').click();
+			</javascript>
+		</script>
+		<button id="search" action="isExists" />
+	</test>
+
+	<test name="Use Tag Script from frame to click on LoginButton"
+		tags="Script, button, JavaScript, M12">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<frame ref="login_js_frame">
+			<script>
+				<javascript>
+					document.getElementById('DoLoginBtn').click();
+				</javascript>
+			</script>
+		</frame>
+		<button id="search" action="isExists" />
+	</test>
+
+
+	<test name="Use Tag Script from extends frame to click on LoginButton"
+		tags="Script, button, JavaScript, M12">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<frame extends="import1:login_js_frame" />
+		<button id="search" action="isExists" />
+	</test>
+
+	<test name="Multiline tag JavaScript" tags="Script, button, JavaScript, M11">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<script>
+			<javascript>
+			<![CDATA[
+ 	 			 input = window.parent.document.createElement('input');
+  	    		 input.type = "submit"; 
+  	    	     input.id="34";
+  		   		 input.value = "Join chat";
+ 				 window.document.body.appendChild(input);
+  				 window.location.href = 'http://localhost:8080/test/login.html';
+ 				 document.getElementById('DoLoginBtn').click();
+ 			]]>
+			</javascript>
+		</script>
+		<button id="search" action="isExists"/> 
+	</test>
+
+	<test name="Extend Sctipt Tag 1" tags="Script, button, JavaScript, M12">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<script extends="import1:loginscript" />
+		<webelement action="isExists" id="clear" />
+	</test>
+
+	<test name="Extend Sctipt Tag from 2 files hierarchy" tags="Script, button, JavaScript, M12">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<script extends="import2:loginscript" />
+		<webelement action="isExists" id="clear" />
+	</test>
+
+	<test name="Put variable from context to js" tags="Script, context, JavaScript, M13">
+		<variable ref="className" value="w150" />
+		<variable ref="classButton" value="regbut" />
+		<variable ref="value" value="some" />
+		
+		<navigate to="http://localhost:${jetty.port}/test/reg_page.htm" />
+		<script>
+			<javascript>
+			<![CDATA[
+ 				document.getElementsByClassName("${className}")[0].value= "${value}";
+ 				document.getElementsByClassName("${className}")[2].value= "${value}";
+ 				document.getElementsByClassName("${className}")[1].value= 41;
+ 				document.getElementsByClassName("${classButton}")[0].click(); 
+ 				]]>
+			</javascript>
+		</script>
+		<webelement action="isExists" id="someid" />
+	</test>
+	
+	<test name="Put variable from js context to framework array" tags="Script, context, JavaScript, M13">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<script>
+			<javascript>
+			<![CDATA[	
+ 				x2s_context["btn.id.1"] = "DoLoginBtn";
+ 				x2s_context["btn.id.2"] = "search";
+ 			]]> 
+			</javascript>
+		</script>
+		<button id="${btn.id.1}" action="click" />
+		<button id="${btn.id.2}" action="isExists" />
+	</test>
+	<test name="Change in js context variable" tags="Script, context, JavaScript, M13">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<variable ref="text" value="some text"/>
+		<variable ref="controll_text" value="another text"/>
+		<script>
+			<javascript>
+			<![CDATA[	
+ 				var text = "${text}";
+ 				text = "another text";
+ 				x2s_context["text"] = text; 
+ 				]]>
+			</javascript>
+		</script>
+		<field id="loginInput" textToType="${text}"/>
+		<webelement id="loginInput"  action="isContainsText" text="${controll_text}"/>
+	</test>
+	
+	<test name="Check few times script import in one test" tags="Script, import, variable,context, JavaScript, M13">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		
+		<variable ref="test_variable" value="loginInput"/>
+		<frame extends="import1:js_frame" />
+		<webelement id="${test_variable}"  action="isContainsText" text="some_text"/>
+		
+		<variable extends="test_variable" ref="test_password" value="passwordInput"/>
+		<frame extends="import1:js_frame2" />
+		<webelement id="${test_password}"  action="isContainsText" text="some_text"/>
+		
+	</test>
+	
+	
+	<test name="Fail test from javascript" tags="Script, error, JavaScript, M19" expectedException="FrameworkException" expectedMessage="error">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<script>
+			<javascript>
+			<![CDATA[	
+ 				x2s_error = "error"; 
+			]]> 
+			</javascript>
+		</script>
+	</test>
+	
+	
+	<test name="Fail test from javascript with exception" tags="Script, error, JavaScript, M19" expectedException="FrameworkException" expectedMessage="precision 100000 out of range">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<script>
+			<javascript>
+			<![CDATA[	
+ 				var pi = 3.14159;
+ 				pi.toFixed(100000); 
+ 			]]>
+			</javascript>
+		</script>
+	</test>
+	
+</testcase>

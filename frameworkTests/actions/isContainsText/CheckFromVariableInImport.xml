@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines Routines.xsd"
+	tags="framework, isContainsText">
+
+	<import name="imp" resource="Import2.xml"/>
+
+	<test name="Check from variable in import" tags="isContainsText, variable, imports">
+        <navigate extends="imp:nav"/>
+		<webelement extends="imp:loginField" action="isExists"/>
+		<field extends="imp:loginField"/>
+		<field extends="imp:loginField" action="isContainsText" text="${loginVar}"/>
+	</test>
+</testcase>

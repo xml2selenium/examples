@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../xml2selenium-plugin-tag/xml2selenium-base-tag/src/main/resources/xml2selenium.xsd">
+
+    <import resource="CommonElements.xml" name="appElements" />
+
+    <!-- independent frame -->
+    <frame ref="AppLogin">
+        <field extends="appElements:loginName" textToType="someLogin"></field>
+        <field extends="appElements:loginPwd" textToType="somePwd"></field>
+        <button extends="appElements:loginButton"></button>
+    </frame>
+
+    <!-- examples with abstract login form inheritance -->
+	<frame ref="CommonLoginFrame">
+		<field ref="loginField" extends="appElements:loginName"></field>
+		<field ref="pwdField" id="passwordInput"></field><!-- this field doesn't extend from anything -->
+		<button ref="submitBtn" extends="appElements:loginButton"></button><!-- this field extends from field from outer universe! -->
+	</frame>
+
+	<frame ref="ManagerLogin" extends="CommonLoginFrame">
+	<!-- this field doesn't extend from anything, but overrides (or even inherits) values from field with same 'ref' value from 'parent' frame. -->
+		<field ref="loginField" id="loginInput" textToType="manager1"></field>
+		<field ref="pwdField" id="passwordInput" textToType="managerpwd"></field>
+	</frame>
+
+    <frame ref="DirectorLogin" extends="CommonLoginFrame">
+        <field ref="loginField" id="loginInput" textToType="dir1"></field>
+        <field ref="pwdField" id="passwordInput" textToType="dirpwd"></field>
+    </frame>
+    
+    <frame ref="DirectorIncorrectPassword" extends="DirectorLogin">
+        <field ref="pwdField" id="passwordInput" textToType="WRONGpwd" typeWay="typeByKey"></field>
+        <button ref="submitBtn" id="newId"></button>
+    </frame>
+</imports>

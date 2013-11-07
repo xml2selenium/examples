@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"          
+          tags="framework, frames, imports, M30">
+
+    <test name="Import not found" tags="hierarchy, M30" description="Import with namespace 'UNEXIST' not found"
+          expectedException="java.lang.IllegalStateException"
+          expectedMessage="You want to get 'appLogin' from import with name 'UNEXIST', but import with this namespace not found" >
+        <navigate ref="basicLogin" to="http://localhost:${jetty.port}/test/login.html"/>        
+        <frame extends="UNEXIST:appLogin"/>
+    </test>
+
+</testcase>

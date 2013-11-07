@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../xml2selenium-plugin-tag/xml2selenium-base-tag/src/main/resources/xml2selenium.xsd"
+          name="Tests for check web-elements inheritance"
+          tags="base, inheritance">
+
+    <test tags="inheritance">
+
+        <!--
+             Elements could be used as parents for other elements with the same tag.
+             For that parent element must define attribute 'ref', which must be
+             unique inside test case (or inside import.See about imports in other examples).
+
+             Child element must define attribute 'extends' with value in 'scope:parentRef'.
+             If child element reference parent which defined in the same context it could
+             skip 'scope' part and even semicolon. i.e.
+                 extends=":parentRef"
+                 extends="parentRef"
+             will points on the same parent.
+
+         -->
+
+        <navigate to="http://localhost:${jetty.port}/test/login.html"></navigate>
+        <screenshot/>
+        <snapshot/>
+        <field id="loginInput" textToType="someLogin"/>
+        <field id="passwordInput" textToType="SomePassword"></field>
+        <button id="DoLoginBtn"></button>
+
+        <!--
+        TODO [kslisenko] to think: "ref" is not very good name for parent element. I think "name" is better and more selfdescriable.
+         -->
+        <button ref="searchBtn" id="search"></button>
+        <webelement ref="orderBtn" id="orderItem" action="isExists"/>
+
+        <!-- 
+            Inheriting from element with ref 'orderBtn'. 
+            
+            Field 'id' will be merged into current element, field 'action' will be 
+            overriden with new value -->
+        <webelement extends="orderBtn" action="isDisplayed"/>
+
+
+        <!-- 
+            Inheriting from element with ref 'orderBtn' (another way to referrence element 
+            defined in the same testcase). 
+            
+            Field 'id' will be merged into current element, field 'action' will be overriden 
+            with new value.
+            Also this element defines own 'ref'. Now it also can be a parent for other elements -->
+        <webelement ref="orderBtnEnablingCheck" extends=":orderBtn" action="isEnabled"/>
+
+
+        <!-- 
+            Let us reuse defined 'orderBtnEnablingCheck once more in new child. It inherits all fields and
+            doing the same actions as it's parent.
+         -->
+        <webelement extends="orderBtnEnablingCheck"/>
+
+
+        <!-- 
+            Any element could be a child. For example, button. Let's ensure that 'search' button 
+            still exists...
+         -->
+        <button extends="searchBtn" action="isExists"/>
+
+
+        <!--
+           ...and click on it once more (without defining of id, as it's specified in parent).
+           See, we do not extends previous action, but we extends 'Button' with ref='searchBtn'
+         -->
+        <screenshot/>
+        <snapshot/>
+        <button extends="searchBtn"/>
+    </test>
+</testcase>

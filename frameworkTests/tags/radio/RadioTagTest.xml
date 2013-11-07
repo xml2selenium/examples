@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+          description="Testcase for radio tag" tags="framework, radio">
+
+    <import name="import" resource="Import.xml"/>
+
+    <test name="Testing default action of radio" tags="radio">
+        <navigate to="http://localhost:${jetty.port}/test/radio.html"/>
+        <radio id="red1"/>
+        <radio id="red1" action="isChecked"/>
+        <radio id="green1"/>
+        <radio id="green1" action="isChecked"/>
+        <radio id="blue1"/>
+        <radio id="blue1" action="isChecked"/>
+        <button id="btn"/>
+    </test>
+
+    <test name="Testing default action of radio by number" tags="radio">
+        <navigate to="http://localhost:${jetty.port}/test/radio.html"/>
+        <variable ref="group" value="group1"/>
+        <radio groupName="${group}" number="1"/>
+        <radio groupName="${group}" number="1" action="isChecked"/>
+        <radio groupName="${group}" number="2"/>
+        <radio groupName="${group}" number="2" action="isChecked"/>
+        <radio groupName="${group}" number="3"/>
+        <radio groupName="${group}" number="3" action="isChecked"/>
+        <button id="btn"/>
+    </test>
+
+
+    <test name="Testing default action of radio by text" tags="radio">
+        <navigate to="http://localhost:${jetty.port}/test/radio.html"/>
+        <variable ref="group1" value="group1"/>
+        <variable ref="group2" value="group2"/>
+        <variable ref="group3" value="group3"/>
+        <radio groupName="${group1}" text="Green"/>
+        <radio groupName="${group1}" text="Green" action="isChecked"/>
+        <radio groupName="${group2}" text="Outer label1"/>
+        <radio groupName="${group2}" text="Outer label1" action="isChecked"/>
+        <radio groupName="${group3}" text="Inner label3"/>
+        <radio groupName="${group3}" text="Inner label3" action="isChecked"/>
+        <button id="btn"/>
+    </test>
+
+    <test name="Testing locators from radioButtons" tags="radio">
+        <navigate to="http://localhost:${jetty.port}/test/radio.html"/>
+        <frame extends="import:radioLocators"/>
+    </test>
+</testcase>

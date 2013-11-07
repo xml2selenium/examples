@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          description="import error" tags="expected exception">
+
+    <import resource="NotExistImport.xml" name="combined" />
+
+    <test name="native success test" tags="success, screenshot">
+        <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+        <frame extends="combined:appLogin"/>
+    </test>
+</testcase>

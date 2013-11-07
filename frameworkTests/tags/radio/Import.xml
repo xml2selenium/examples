@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../../xml2selenium-core/src/main/resources/Routines.xsd ">
+
+    <frame ref="radioLocators">
+        <radio cssSelector=".cssSelectorClass" text="Green"/>
+        <radio xpath="//input[@value='xpath']" action="click"/>
+        <radio id="idid" action="click"/>
+        <radio id="id4id" action="click"/>
+        <radio tagName="input" action="click"/>
+    </frame>
+</imports>

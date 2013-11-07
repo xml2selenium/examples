@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../../xml2selenium-core/src/main/resources/Routines.xsd ">
+
+	<frame ref="searchItems">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+
+		<field ref="login" id="loginInput" textToType="someLogin" />
+		<field ref="password" id="passwordInput" textToType="SomePassword" />
+		<button ref="doLogin" id="DoLoginBtn" />
+
+		<button id="search" />
+	</frame>
+	
+	<webelement xpath="//*[@id='searchResults']/table/tbody/tr[2]/td[2]" action="isContainsText" ref="firstTableCell" />
+</imports>

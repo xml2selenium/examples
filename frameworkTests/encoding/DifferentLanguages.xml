@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="Test different languages on page" tags="encoding">
+	<import resource="CommonElements.xml" name="elements"/>
+
+	<test name="Test russian text on page with utf8" description="Encoding utf8" tags="encoding, russian">
+	    <navigate to="http://localhost:${jetty.port}/test/encodings/ru.html"/>
+	    <frame extends="elements:testRussianPage"/>
+	</test>
+	
+	<test name="Test russian text on page with cp1251" description="Encoding cp1251" tags="encoding, russian">
+	    <navigate to="http://localhost:${jetty.port}/test/encodings/ru_cp1251.html"/>
+        <frame extends="elements:testRussianPage"/>
+	</test>
+	
+	<test name="Test german text on page with utf8" description="Encoding utf8" tags="encoding, german">
+	    <navigate to="http://localhost:${jetty.port}/test/encodings/de.html"/>
+	    <frame extends="elements:testGermanPage"/>
+	</test>	
+</testcase>

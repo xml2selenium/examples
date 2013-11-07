@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	description="Testcase for testing situation when two test have the same name"
+	tags="framework, checkbox" expectedException="FrameworkException" expectedMessage="Tests should have unique names. Test name 'The same' in testCase 'frameworkTests.common.wrongSituations.TestsWithTheSameNames#xml' is not unique.">
+
+	<test name="The same" tags="checkbox">
+		<navigate to="http://localhost:${jetty.port}/test/checkbox.html" />
+		<checkbox id="checkboxId1" />
+		<checkbox id="checkboxId1" action="isEnabled" />
+		<checkbox id="checkboxId1" />
+		<checkbox id="checkboxId1" action="isDisabled" />
+	</test>
+
+	<test name="The same" tags="checkbox">
+		<navigate to="http://localhost:${jetty.port}/test/checkbox.html" />
+		<checkbox id="checkboxId2" action="enable" />
+		<checkbox id="checkboxId2" action="isEnabled" />
+		<checkbox id="checkboxId2" action="enable" />
+		<checkbox id="checkboxId2" action="isEnabled" />
+	</test>
+
+</testcase>

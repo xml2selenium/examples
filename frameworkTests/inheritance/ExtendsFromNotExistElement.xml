@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	tags="framework, inheritance, notExistElement">
+	
+	<test name="Extends from not exists element [14]"
+		expected="error" where="failElement"
+		expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkException"
+		expectedMessage="Element 'nonExistElement' not found. Maybe you forget to set namespace name to element 'nonExistElement'"
+		tags="inheritance, notExistElement, negative">
+		
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		<webelement id="loginInput" ref="failElement" extends="nonExistElement" action="isExists"/>
+	</test>
+</testcase>

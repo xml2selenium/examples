@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	description="Testcase for assert plugin" tags="framework, assert">
+
+	<test name="variableExists test [success]" tags="assert">
+		<variable ref="attributeValue" value="New Value For Attribute" />
+		<assert first="attributeValue" action="variableExists" />
+	</test>
+
+	<test name="variableExists test [error]" tags="assert" expectedException="java.lang.AssertionError">
+		<variable ref="attributeValue" value="New Value For Attribute" />
+		<assert first="attributeValue1" action="variableExists" />
+	</test>
+
+	<test name="moreThan processor test" tags="assert">
+		<variable ref="x" value="10" />
+		<variable ref="y" value="2" />
+		<assert first="${x}" second="${y}" action="moreThan" />
+	</test>
+
+	<test name="moreThan processor test [error]" tags="assert"
+		expectedException="java.lang.AssertionError">
+		<variable ref="x" value="10" />
+		<variable ref="y" value="10" />
+		<assert first="10" second="10" action="moreThan" />
+	</test>
+
+	<test name="equals processor test" tags="assert">
+		<assert first="assert" second="assert" action="equals" />
+	</test>
+
+	<test name="not equals processor test" tags="assert"
+		expectedException="java.lang.AssertionError">
+		<assert first="assert" second="notassert" action="equals" />
+	</test>
+
+	<test name="empty processor test" tags="assert">
+		<assert first="" action="isEmpty" />
+	</test>
+
+	<test name="empty processor test with variable [error]" tags="assert">
+		<variable ref="empty" value="" />
+		<assert first="${empty}" action="isEmpty" />
+	</test>
+
+	<test name="empty processor test [error]" tags="assert"
+		expectedException="java.lang.AssertionError">
+		<assert first="assert" action="isEmpty" />
+	</test>
+
+	<test name="isTrue processor test" tags="assert">
+		<assert first="${(4>1).toString()}" action="isTrue" />
+	</test>
+
+	<test name="isTrue processor test [expression error]" tags="assert"
+		expectedException="java.lang.AssertionError">
+		<assert first="${(4&lt;1).toString()}" action="isTrue" />
+	</test>
+
+	<test name="isTrue processor test [error]" tags="assert"
+		expectedException="java.lang.AssertionError">
+		<assert first="false" action="isTrue" />
+	</test>
+
+	<test name="size processor test [4 elements]" tags="assert, M23">
+		<navigate to="http://localhost:${jetty.port}/test/iterate.html" />
+		<webelement xpath="//input" ref="input_elements" />
+		<assert first="input_elements" second="4" action="size" />
+	</test>
+
+	<test name="size processor test [1 element]" tags="assert, M23">
+		<navigate to="http://localhost:${jetty.port}/test/iterate.html" />
+		<webelement xpath="//body" ref="body" />
+		<assert first="body" second="1" action="size" />
+	</test>
+	
+	<test name="size processor test [wrong number of expected elements]" tags="assert, M23"
+          expectedException="AssertionError"
+          expectedMessage="Size of web elements '1' is not equals with given size '2'">
+		<navigate to="http://localhost:${jetty.port}/test/iterate.html" />
+		<webelement xpath="//body" ref="body" />
+		<assert first="body" second="2" action="size" />
+	</test>
+
+	<test name="isContainsText processor test" tags="assert, M25">
+		<assert first="assert" second="ass" action="isContainsText" />
+	</test>
+
+	<test name="not isContainsText processor test" tags="assert, M25" expectedException="java.lang.AssertionError">
+		<assert first="assert" second="notassert" action="isContainsText" />
+	</test>
+
+    <test name="moreThan processor test [4 elements] more than [3]" tags="assert, M27">
+        <navigate to="http://localhost:${jetty.port}/test/iterate.html" />
+        <webelement xpath="//input" ref="input_elements" />
+        <assert first="input_elements" second="3" action="moreThan" />
+    </test>
+
+    <test name="moreThan processor test [4 elements] more than [5] expected failure" tags="assert, M27">
+        <navigate to="http://localhost:${jetty.port}/test/iterate.html" />
+        <webelement xpath="//input" ref="input_elements" />
+        <webelement xpath="//body" ref="body" />
+        <assert first="input_elements" second="body" action="moreThan" />
+    </test>
+
+    <test name="moreThan processor test. No exist element. Expected error" tags="assert, M27"
+            expectedException="FrameworkException">
+        <navigate to="http://localhost:${jetty.port}/test/iterate.html" />
+        <assert first="noexist" second="noexist" action="moreThan" />
+    </test>
+
+	<test name="fileDownloaded test" tags="assert, download, M27"	expectedException="java.lang.AssertionError">
+		<assert first="" action="fileDownloaded" />		
+	</test>
+
+	<test name="file is not downloaded" tags="assert, download, M27" 
+	 	expected="error" expectedException="FrameworkException"
+	 	expectedMessage="File is not downloaded">
+		<navigate to="http://localhost:${jetty.port}/test/download/download.html" />					
+		<webelement action="click" id="noLink" />		
+		<assert action="fileDownloaded" first="path"/>
+	</test>
+</testcase>

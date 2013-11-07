@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../xml2selenium-plugin-tag/xml2selenium-base-tag/src/main/resources/xml2selenium.xsd"
+ 	description="Basic test case" tags="base, simple">
+	
+	<test name="Simple test" description="Simple test for testing base framework functions" tags="simple">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+        <screenshot />
+        <snapshot/>
+        
+        <field id="loginInput" textToType="someLogin"/>
+        <field id="passwordInput" textToType="SomePassword"/>
+        <button id="DoLoginBtn"/>
+        
+        <button id="search"></button>
+        <webelement id="orderItem" action="isExists"/>
+        <screenshot />
+        <snapshot/>
+	</test>	
+</testcase>

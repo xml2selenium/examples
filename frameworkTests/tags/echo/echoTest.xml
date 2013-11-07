@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	tags="breadcrumb echo">
+	
+    <import resource="import1.xml" name="appElements1" />
+    
+	<test name="Echo test with one import"
+			tags="echo breadcrumb">
+
+        <echo extends="appElements1:importLog"/>
+
+    </test>
+
+    <test name="Echo test without import"
+			tags="echo breadcrumb">
+
+        <echo message="Test Log"/>
+
+    </test>
+</testcase>

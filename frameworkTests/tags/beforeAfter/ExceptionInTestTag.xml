@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	description="Test exception in Test tag" tags="framework, before, after">
+	
+	<before>
+		<navigate to="http://localhost:${jetty.port}/test"/>
+	</before>
+	
+	<test name="Test with Before and After tags" tags="before, after, negative"
+			expected="fail" where="failedElement" 
+			expectedException="java.lang.AssertionError" expectedMessage="Element with 'id=search' is not exists">
+		<field id="loginInput" textToType="lng"/>
+		<webelement id="loginInput" action="isContainsText" text="lng"/>
+		
+		<defaultdelay time="5000"/>
+		<webelement ref="failedElement" id="search" action="isExists"/>
+	</test>
+	
+	<after>
+		<webelement id="loginInput" action="isExists"/>
+	</after>
+</testcase>

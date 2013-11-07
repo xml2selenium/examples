@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="Test case for validation when tag use before test" tags="validation">
+	<!-- TODO [kslisenko] throw validation error in this case. May be this is a XSD-level issue? -->
+	<field id="loginInput" textToType="someLogin"/>	
+	<test name="Wrong place of tag" description="Checks validation message if we have tag before test" tags="validation">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+        <field id="loginInput" textToType="someLogin"/>
+	</test>
+</testcase>

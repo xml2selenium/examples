@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../xml2selenium-plugin-tag/xml2selenium-base-tag/src/main/resources/xml2selenium.xsd">
+
+	<test name="Create test witn very very long filename and full path for video is over the limit for Windows, that track down the problemm with xuggle. Maximum length for a path of video file is defined as 260 characters." 
+			description="Test for create video witn long name" 
+			expected="error" tags="video" expectedException="FrameworkException">
+		<video action="start"/>
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>		
+		<video action="stop"/>
+	</test>
+</testcase>

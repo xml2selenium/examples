@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="Test case for check test with error" tags="error">
+	
+	<test name="Test with errors" description="Checks error message in test if can't find element by wrong id" tags="error">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<frame ref="parent">
+			<field ref="loginField" id="loginInput" textToType="login_1"/>
+		</frame>
+		<webelement id="loginInput" action="isContainsText" text="login_1"/>
+		
+		<defaultdelay time="2000"/>
+		
+		<frame extends="parent">
+			<field ref="loginField" id="unknown" textToType="unknown_login"/>
+		</frame>
+	</test>
+</testcase>

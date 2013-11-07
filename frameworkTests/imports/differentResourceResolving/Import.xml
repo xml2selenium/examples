@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<import resource="Import2.xml" name="importByRelativePath" />
+
+	<frame ref="navigateAndScreenshot">
+    	<navigate extends="importByRelativePath:navigate"/>
+        <screenshot />
+        <snapshot/>
+	</frame>
+</imports>

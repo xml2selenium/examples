@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	tags="framework, variable">
+
+	<test name="Change value of variable" tags="variable">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<variable ref="var1" value="123"/>
+		<field id="loginInput" textToType="${var1}" />
+		<field id="loginInput" action="isContainsText" text="123"/>
+		
+		<variable ref="var2" value="456"/>
+		<field id="loginInput" textToType="${var2}" />
+		<field id="loginInput" action="isContainsText" text="456"/>
+	</test>
+</testcase>

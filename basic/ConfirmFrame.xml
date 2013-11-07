@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../xml2selenium-plugin-tag/xml2selenium-base-tag/src/main/resources/xml2selenium.xsd">
+
+	<import name="confirm" resource="systemDialog/Confirm.xml" />
+
+    <frame extends="confirm:confirmResult" ref="returnTrue">
+    	<variable ref="result" value="true"/>
+    </frame>
+    
+    <frame extends="confirm:confirmResult" ref="returnFalse">
+    	<variable ref="result" value="false"/>
+    </frame>
+</imports>

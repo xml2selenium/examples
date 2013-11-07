@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	Checks if some errors happened after test-case started, but before any tests started (example: initialization error) 
+ -->
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	expectedException="FrameworkException" expectedMessage="FileNotFound">
+
+	<import resource="frameworkTests/imports/cyclicImports/NonExistingImport.xml" name="appElements" />
+
+	<test name="Test in wrong test-case" />
+</testcase>

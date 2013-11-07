@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="Basic test case" tags="base, simple">
+	
+	<import resource="frameworkTests/imports/differentResourceResolving/Import.xml" name="byClasspathRoot" />
+	
+	<test name="Test import by classpath root" description="Testing that importing xml import by classpath root works" tags="import, classpathRoot">
+		<frame extends="byClasspathRoot:navigateAndScreenshot" />
+        <field id="loginInput" textToType="someLogin"/>
+        <field id="passwordInput" textToType="SomePassword"/>
+        <button id="DoLoginBtn"/>
+        
+        <button id="search"></button>
+        <webelement id="orderItem" action="isExists"/>
+        <screenshot />
+        <snapshot/>
+	</test>
+</testcase>

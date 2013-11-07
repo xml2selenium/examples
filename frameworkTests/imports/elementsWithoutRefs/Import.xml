@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../../xml2selenium-core/src/main/resources/Routines.xsd ">
+	
+	<!-- First element without ref attribute -->
+	<variable ref="loginVar" value="login-login"/>
+	
+	<!-- Second element without ref attribute -->
+	<field subId="password" textToType="passw"/>
+	
+	<navigate ref="nav" to="http://localhost:${jetty.port}/test/login.html"/>
+	<field ref="loginField" subId="login" textToType="${loginVar}"/>
+	
+</imports>

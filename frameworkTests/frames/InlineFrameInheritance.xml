@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	tags="framework, frames, inheritance">
+
+	<test name="Inline frame inheritance" tags="frames, inheritance">
+		 <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		 
+		 <frame>
+		 	<field subId="login" ref="fieldFrame1" textToType="test"/>
+		 </frame>
+		 
+		 <frame>
+		 	<field extends="fieldFrame1" subId="password"/>
+		 	<webelement subId="login" action="isContainsText" text="test"/>
+		 	<webelement subId="password" action="isContainsText" text="test"/>
+		 </frame>
+	</test>
+</testcase>

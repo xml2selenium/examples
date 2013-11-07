@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../xml2selenium-core/src/main/resources/Routines.xsd"
+	description="Common framework cases with different situations"
+	tags="framework, common">
+	
+	<import name="imports" resource="imports.xml" />
+	
+	<test name="Multiple navigates to same page" 
+		description="Multiple navigates to same page. ID: 1" 
+		tags="common, navigation">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement id="loginInput" action="isDisplayed"/>
+	    
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement id="loginInput" action="isDisplayed"/>
+	    
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement id="loginInput" action="isDisplayed"/>
+	    
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement id="loginInput" action="isDisplayed"/>
+	</test>
+	
+	<test name="Non exists elements" description="Non-exists elements calls. ID: 2"
+		expected="error" where="failElement"
+		expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkWebDriverException"
+		expectedMessage="Can not find element on web page by id=someNonExistElement"
+		tags="common, notExistElements, negative">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		<field id="someNonExistElement" ref="failElement" textToType="someLogin"/>
+        <button id="someNoExistsButton"></button>
+	</test>
+
+	<test name="Navigate to non-existed pages" description="Navigate to non-existed pages ID: 3"
+			expected="error" where="failElement"
+			expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkWebDriverException"
+			expectedMessage="Can not navigate to url 'some error ref'"
+			tags="common, notExistPages, negative">
+	    <navigate to="some error ref" ref="failElement"/>
+	    <navigate to="!::///'' - -   @fffggg777" />
+	</test>
+
+	<test name="Start test before navigate" description="Start tests before navigate. ID: 4"
+			expected="error" where="failElement"
+			expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkWebDriverException"
+			expectedMessage="Can not find element on web page by id=loginInput"
+			tags="common, notExistElement, negative">
+		<field id="loginInput" ref="failElement" textToType="someLogin"/>
+        <field id="passwordInput" textToType="SomePassword"></field>
+        <button id="DoLoginBtn"></button>
+        
+        <button id="search"></button>
+        <webelement id="orderItem" action="isExists"/>
+	</test>
+	
+	<test name="Use non existent variables [7]"
+			expected="error" where="failElement"
+			expectedException="java.lang.IllegalStateException"
+			expectedMessage='Expression "unknownVariable" cannot be evaluated. See original exception:'
+			tags="common, variables, negative">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		<field id="loginInput" ref="failElement" textToType="${unknownVariable}"/>
+	</test>
+	
+	<test name="Use non existent actions [8]"
+			expected="error" where="failElement"
+			expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkException"
+			expectedMessage="Unknown action [unknownAction] for element Webelement"
+			tags="common, wrongActions, negative">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		<webelement id="loginInput" ref="failElement" action="unknownAction"/>
+	</test>
+	
+	<test name="Two elements has same selectors [6]" tags="common, selectors">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<button subId="Login"/>
+		<webelement id="search" action="isExists"/>
+		
+		<button id="search"/>
+		<webelement id="resultsDiv" action="isDisplayed"/>
+	</test>
+	
+	<test name="Element has same ref and id" tags="common, selectors">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		<field id="loginInput" ref="loginInput"/>
+		<button subId="Login"/>
+		<webelement ref="search" id="search" action="isExists"/>
+	</test>
+	
+	<test name="Element with same ref and id from import" tags="common, selectors">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		<field extends="imports:loginInput" ref="loginInput"/>
+		<button subId="Login"/>
+		<webelement extends="imports:search" id="search" action="isExists"/>
+	</test>
+
+</testcase>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines Routines.xsd"
+	tags="framework, property">
+
+	<test name="Property exist in file [64]" tags="property">
+		<property resource="property-tag-test1.properties" name="loginData" />
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+
+		<field ref="login" id="loginInput" textToType="${loginData.login}" />
+		<field ref="password" id="passwordInput" textToType="${loginData.password}" />
+	</test>
+	
+	<test name="Load only one concrete property by key [65]" 
+			expected="error" where="password" 
+			expectedException="java.lang.IllegalStateException" 
+			expectedMessage='Expression "loginData.password" cannot be evaluated. See original exception:'
+			tags="property, negative">
+		<property resource="property-tag-test1.properties" name="loginData" key="login"/>
+		
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+
+		<field ref="login" id="loginInput" textToType="${loginData.login}" />
+		<field ref="password" id="passwordInput" textToType="${loginData.password}" />
+	</test>
+
+	<test name="Properties file doesn't exists [66]" 
+			expected="error" where="failElement"
+			expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkException"
+			expectedMessage="Cannot find resource by path 'unknown-property'"
+			tags="property, negative">
+		<property ref="failElement" resource="unknown-property" name="loginData" />
+	</test>
+	
+	<test name="Property doesn't exist in file [67]" 
+			expected="error" where="login" 
+			expectedException="java.lang.IllegalStateException" 
+			expectedMessage='Expression "loginData.unknownProperty" cannot be evaluated. See original exception:'
+			tags="property, negative">
+		<property resource="property-tag-test1.properties" name="loginData"/>
+		
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+
+		<field ref="login" id="loginInput" textToType="${loginData.unknownProperty}" />
+	</test>
+	
+	<test name="Concrete property by key doesn't exist in file [68]" 
+			expected="error" where="failElement" 
+			expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkException" 
+			expectedMessage="Property with name 'loginData.unknown.key' not found in properties 'loginData'"
+			tags="property, negative">
+		<property ref="failElement" resource="property-tag-test1.properties" name="loginData" key="unknown.key"/>
+	</test>
+	 
+	<test name="Use property with similar name from various properies files [74]" tags="property">
+		<property resource="property-tag-test1.properties" name="prop1" />
+		<property resource="property-tag-test2.properties" name="prop2" />
+		
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<field ref="login" id="loginInput" textToType="${prop1.login}" />
+		<field ref="password" id="passwordInput" textToType="${prop1.password}" />
+		
+		<field ref="login2" id="loginInput" textToType="${prop2.login}" />
+		<field ref="password2" id="passwordInput" textToType="${prop2.password}" />
+		<field extends="login" action="isContainsText" text="logingFromProperties2"/>
+	</test>
+</testcase>

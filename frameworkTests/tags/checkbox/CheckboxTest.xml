@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	description="Basic test for checkbox plugin" tags="framework, checkbox">
+
+	<import name="elements" resource="ImportWithCheckbox.xml" />
+
+	<test name="Testing default action of checkbox and checking state"
+		tags="checkbox">
+		<navigate to="http://localhost:${jetty.port}/test/checkbox.html" />
+		<checkbox id="checkboxId1" />
+		<checkbox id="checkboxId1" action="isEnabled" />
+		<checkbox id="checkboxId1" />
+		<checkbox id="checkboxId1" action="isDisabled" />
+	</test>
+
+	<test name="Testing enable action of checkbox and checking state"
+		tags="checkbox">
+		<navigate to="http://localhost:${jetty.port}/test/checkbox.html" />
+		<checkbox id="checkboxId2" action="enable" />
+		<checkbox id="checkboxId2" action="isEnabled" />
+		<checkbox id="checkboxId2" action="enable" />
+		<checkbox id="checkboxId2" action="isEnabled" />
+	</test>
+
+	<test name="Testing disable action of checkbox and checking state"
+		tags="checkbox">
+		<navigate to="http://localhost:${jetty.port}/test/checkbox.html" />
+		<checkbox id="checkboxId3" action="disable" />
+		<checkbox id="checkboxId3" action="isDisabled" />
+		<checkbox id="checkboxId3" action="disable" />
+		<checkbox id="checkboxId3" action="isDisabled" />
+	</test>
+
+	<test name="Testing click action of checkbox and checking state"
+		tags="checkbox">
+		<navigate to="http://localhost:${jetty.port}/test/checkbox.html" />
+		<checkbox id="checkboxId4" action="click" />
+		<checkbox id="checkboxId4" action="isEnabled" />
+		<checkbox id="checkboxId4" action="click" />
+		<checkbox id="checkboxId4" action="isDisabled" />
+	</test>
+
+	<test name="Testing import" tags="checkbox" description="Import ">
+		<navigate to="http://localhost:${jetty.port}/test/checkbox.html" />
+		<checkbox extends="elements:checkbox1" />
+	</test>
+</testcase>

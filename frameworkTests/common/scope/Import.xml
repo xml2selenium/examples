@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<variable ref="loginField" value="login_import"/>
+	
+	<frame ref="enterPassword">
+		<variable ref="passwordField" value="password_import"/>
+		<field id="passwordInput" textToType="${passwordField}"/>
+	</frame>
+	
+	<frame ref="enterCredentials">
+		<field id="loginInput" textToType="${loginField}"/>
+		<frame extends="enterPassword"/>
+		
+		<webelement id="loginInput" action="isContainsText" text="login_import"/>
+		<webelement id="passwordInput" action="isContainsText" text="password_import"/>
+	</frame>
+</imports>

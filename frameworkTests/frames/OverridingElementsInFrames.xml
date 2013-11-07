@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	tags="framework, frames, inheritance, bugfixes">
+
+	<test name="Bugfix 11. Overriding elements in frames" tags="frames, inheritance, bugfixes, negative"
+			expected="error" expectedException="java.lang.IllegalStateException"
+			expectedMessage="Element 'Webelement' cannot contains in 'Frame' because has not 'ref' attribute, or 'ref' attribute is empty, or parent Frame has not element with same 'ref'">
+		 <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		 
+		 <frame ref="frame1">
+		 	<defaultdelay time="500"/>
+		 </frame>
+		 
+		 <frame extends="frame1">
+		 	<webelement id="loginInput" action="isExists"/>
+		 </frame>
+	</test>
+	
+	<test name="Use element without 'ref' attribute in child frame"
+			expected="error" expectedException="java.lang.IllegalStateException"
+			expectedMessage="Element 'Webelement' cannot contains in 'Frame' because has not 'ref' attribute, or 'ref' attribute is empty, or parent Frame has not element with same 'ref'"
+			tags="frames, inheritance, negative">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<frame ref="frame1">
+		 	<webelement ref="r1" subId="login" action="isExists"/>
+		 </frame>
+		 
+		 <frame extends="frame1">
+		 	<webelement subId="password" action="isExists"/>
+		 </frame>
+	</test>
+	
+	<test name="Child frame contains element with unknown 'ref' for parent frame"
+			expected="error" expectedException="java.lang.IllegalStateException"
+			expectedMessage="Element 'Webelement' cannot contains in 'Frame' because has not 'ref' attribute, or 'ref' attribute is empty, or parent Frame has not element with same 'ref'"
+			tags="frames, inheritance, negative">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<frame ref="frame1">
+		 	<webelement ref="r1" subId="login" action="isExists"/>
+		 </frame>
+		 
+		 <frame extends="frame1">
+		 	<webelement ref="r2" subId="password" action="isExists"/>
+		 </frame>
+	</test>
+	
+	<test name="Inheritance of frames" tags="frames, inheritance">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<frame ref="frame1">
+		 	<field ref="r1" subId="login" textToType="lgn"/>
+		 </frame>
+		 
+		 <frame extends="frame1">
+		 	<field ref="r1" subId="password" textToType="lgn"/>
+		 </frame>
+		 
+		 <webelement subId="login" action="isContainsText" text="lgn"/>
+		 <webelement subId="password" action="isContainsText" text="lgn"/>
+	</test>
+	
+	<test name="Use elements without 'ref' in non inherited frames">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<frame>
+		 	<field ref="r1" subId="login" textToType="lgn"/>
+		 </frame>
+		 
+		 <frame>
+		 	<field subId="password" textToType="passwd"/>
+		 </frame>
+		 
+		 <webelement subId="login" action="isContainsText" text="lgn"/>
+		 <webelement subId="password" action="isContainsText" text="passwd"/>
+	</test>
+</testcase>

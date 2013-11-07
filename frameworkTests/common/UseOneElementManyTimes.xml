@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../xml2selenium-core/src/main/resources/Routines.xsd "
+	tags="framework, common">
+
+	<test name="Use one element many times [1.1]"
+			tags="common">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<field subId="login" textToType="login-login"/>
+		<field subId="login" textToType="login-login"/>
+		
+		<webelement subId="login" action="isExists"/>
+		<webelement subId="login" action="isExists"/>
+		
+		<button subId="LoginBtn"/>
+		
+		<button subId="search"/>
+		<button subId="search"/>
+	</test>
+</testcase>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../../xml2selenium-core/src/main/resources/Routines.xsd ">
+
+	<button ref="loginButton" subId="DoLogin"/>
+	
+	<field ref="loginField" subId="login" textToType="login-login"/>
+	
+	<frame ref="doLogin">
+		<field subId="login" textToType="login-login"/>
+		<field subId="password" textToType="passwd"/>
+		<button subId="DoLogin"/>	
+	</frame>
+	
+	<navigate ref="navigateToLoginPage" to="http://localhost:${jetty.port}/test/login.html"/>
+	
+	<property ref="prop" name="AccountProps" resource="account.properties"/>
+	
+	<variable ref="application.host" value="localhost"/>
+	
+	<!-- 
+		Frame contains non existent field. We set wait time for search field
+		and then check this time in test.
+	 -->
+	<frame ref="errorEnterLoginWithdefaultDelay">
+		<defaultdelay time="5600"/>
+		<field subId="lgn" textToType="login-login"/>
+	</frame>
+	
+	<webelement ref="loginButtonAtWebElement" subId="DoLogin" action="click"/>
+	
+	<script ref="clickLoginButtonWithJavaScript">
+		<javascript>
+			document.getElementById('DoLoginBtn').click();
+		</javascript>
+	</script>
+</imports>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../xml2selenium-core/src/main/resources/Routines.xsd "
+	tags="framework, common, M12">
+	<test name="Test separate tags 1"
+			tags="M12 , tag with space 1, tag with space 2 ">
+	</test>
+	
+	<test name="Test separate tags 2"
+			tags=" tag with space 2, M12 , tag with space 1">
+	</test>
+</testcase>

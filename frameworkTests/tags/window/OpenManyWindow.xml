@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines http://xml2selenium.com/schema/xml2selenium.xsd"	
+	description="Basic test case for window tag" tags="window, M28">
+  
+ 	<test name="Check open many window" description="Test for check open four popap window" coverage="100"  
+		tags="window, M28">		
+		<navigate to="http://localhost:${jetty.port}/test/tabs/window.htm" />	
+			
+		<webelement ref="linkForNewPopap" id="inNewWindow" action="isExists" />
+		<webelement extends="linkForNewPopap" action="click" />
+		
+ 		<window assert="newWindowOpened:background" /> 
+		<window action="goToNewWindow"/>
+		<window assert="newWindowOpened:current" />
+		
+		<webelement ref="twoLinkForNewPopap" id="inNewWindow" action="isExists" />
+		<webelement extends="twoLinkForNewPopap" action="click" />
+		
+		<window assert="newWindowOpened:background" />  
+		<window action="goToNewWindow"/>
+		<window assert="newWindowOpened:current" />
+		
+		<webelement ref="threeLinkForNewPopap" id="inNewWindow" action="isExists" />
+		<webelement extends="threeLinkForNewPopap" action="click" />
+		 
+		<window assert="newWindowOpened:background" />  
+		<window action="goToNewWindow"/>
+		<window assert="newWindowOpened:current" />
+		
+		<webelement ref="fourLinkForNewPopap" id="inNewWindow" action="isExists" />
+		<webelement extends="fourLinkForNewPopap" action="click" />
+		 
+		<window assert="newWindowOpened:background" />  
+		<window action="goToNewWindow"/>
+		<window assert="newWindowOpened:current" />
+	</test>
+</testcase>

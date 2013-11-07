@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<before ref="beforeWithDefaultScope">
+		<variable ref="loginVar" value="login_1"/>
+	</before>
+
+	<before ref="beforeWithTestScope" scope="test">
+		<variable ref="loginVar" value="login_1"/>
+	</before>
+</imports>

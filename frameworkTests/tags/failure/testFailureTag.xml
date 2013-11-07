@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+          tags="failure">
+
+    <test name="Test of tag failure with error result"
+          tags="failure" expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkException" expectedMessage="My Error exeption message">
+        <failure result="error" message="My Error exeption message"/>
+    </test>
+
+    <test name="Test of tag failure with failure result"
+          tags="failure" expectedException="java.lang.AssertionError" expectedMessage="My failure exeption message">
+        <failure message="My failure exeption message"/>
+    </test>
+
+</testcase>

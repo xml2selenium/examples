@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	tags="framework, inheritance">
+	
+	<test name="Extends WebElement from Frame [52]" 
+			expected="error" where="failElement"
+			expectedException="java.lang.IllegalStateException"
+			expectedMessage="Webelement can not extend Frame"
+			tags="inheritance, negative, frames, webElement">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<frame ref="frame">
+			<field id="loginInput" textToType="login-login"/>
+		</frame>
+		
+		<webelement id="loginInput" ref="failElement" extends="frame" action="isExists"/>
+	</test>
+	
+	<test name="Extends Frame from WebElement [53]" 
+			expected="error" where="failElement"
+			expectedException="java.lang.IllegalStateException"
+			expectedMessage="Frame can not extend Webelement"
+			tags="inheritance, negative, frames, webElement">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+
+		<webelement id="loginInput" ref="loginField" action="isExists"/>
+		
+		<frame ref="failElement" extends="loginField">
+			<field id="loginInput" textToType="login-login"/>
+		</frame>
+	</test>
+	
+	<test name="Extends WebElement from Button [54]"
+			tags="inheritance, button, webElement">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<button subId="LoginBtn" ref="button"/>
+		<webelement extends="button" subId="search"/>
+	</test>
+	
+	<test name="Extends WebElement from Field [55]"
+			tags="inheritance, field, webElement">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<field id="loginInput" ref="loginField" textToType="login-login"/>
+		<webelement extends="loginField" action="isExists"/>
+	</test>
+	
+	<test name="Extends Button from WebElement [56]"
+			tags="inheritance, button, webElement">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<webelement subId="LoginBtn" ref="button" action="click"/>
+		<button extends="button" subId="search"/>
+	</test>
+	
+	<test name="Extends Field from WebElement [57]"
+			tags="inheritance, field, webElement">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<webelement id="loginInput" ref="loginField"  action="isExists"/>
+		<field extends="loginField" textToType="login-login"/>
+	</test>
+	
+	<!-- TODO to think, which inheritance do we allow, and whith don't and which messages must being thrown -->
+	<test name="Extends Button from Field [58]" 
+			expected="error" where="failElement"
+			expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkException"
+			expectedMessage="Unknown action [type] for element Button"
+			tags="inheritance, negative, field, button">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<field id="loginInput" ref="loginField" textToType="login-login"/>
+		<button ref="failElement" extends="loginField" subId="LoginBtn"/>
+	</test>
+
+	<!-- Test must be failed, but it has success -->
+	<test name="Extends Field from Button [59]"
+			tags="inheritance, negative, field, button">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<button subId="LoginBtn" ref="button"/>
+		<field extends="button" id="search" textToType="login-login"/>
+	</test>
+</testcase>

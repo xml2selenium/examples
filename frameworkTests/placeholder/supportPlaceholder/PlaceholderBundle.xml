@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../../xml2selenium-core/src/main/resources/Routines.xsd ">
+
+	<button ref="loginButton" subId="DoLogin"/>
+	<button ref="checkLoginButton" extends="loginButton" action="isExists"/>
+	<button ref="logoutButton" id="logoutLink"/>
+	<field ref="loginField" subId="login"/>
+	<field ref="passwordField" id="passwordInput"/>
+	<button ref="orderSelectionButton" id="orderItem"/>
+	<button ref="checkOrderSelectionButton" extends="orderSelectionButton" action="isExists"/>
+
+	<variable ref="url" value="http://localhost:${jetty.port}/test/login.html"/>
+	<variable ref="login" value="login_1"/>
+	<variable ref="password" value="password_1"/>
+	<variable ref="secondLogin" value="login_2"/>
+	<variable ref="secondPassword" value="password_2"/>
+
+	<frame ref="fillLogin">
+		<navigate to="${url}"/>
+		<frame ref="fillLoginInfo"/>
+	</frame>
+
+	<frame ref="fillLoginFirst">
+		<field extends="loginField" textToType="${login}"/>
+		<field extends="passwordField" textToType="${password}"/>
+	</frame>
+	
+	<frame ref="fillLoginSecond">
+		<field extends="loginField" textToType="${secondLogin}"/>
+		<field extends="passwordField" textToType="${secondPassword}"/>
+	</frame>
+	
+	<frame ref="doLogin">
+		<button extends="loginButton"/>	
+	</frame>
+	
+	<frame ref="doLogout">
+		<!-- Empty body for next two frames -->
+		<frame ref="somethingAction"/>
+		<frame ref="somethingActionSecond"/>
+		<frame extends="logout"/>
+		<button extends="checkLoginButton"/>
+	</frame>
+	
+	<frame ref="logout">
+		<button extends="logoutButton"/>
+	</frame>
+	
+	
+	<frame ref="checkFirst">
+		<field extends="loginField" action="isContainsText" text="${login}"/>
+		<field extends="passwordField" action="isContainsText" text="${password}"/>
+	</frame>
+	
+	<frame ref="checkSecond">
+		<field extends="loginField" action="isContainsText" text="${secondLogin}"/>
+		<field extends="passwordField" action="isContainsText" text="${secondPassword}"/>
+	</frame>
+	
+	<frame ref="checkButton">
+		<webelement id="search" action="isExists"/>
+	</frame>
+	
+	<frame ref="doAction">
+		<button id="search"/>
+		<frame extends="checkButton"/>
+		<frame ref="additionalFrame"/>
+	</frame>
+</imports>

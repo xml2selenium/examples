@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="Basic test case" tags="base, simple">
+
+	<import resource="folderInDependency/ImportInDependency.xml" name="dependency"/>
+	
+	<test name="Test import resource from another maven dependency" description="Checks that importing xml imports from another maven project works" tags="import, reusableLib">
+		<frame extends="dependency:loginAndScreenshot"/>
+        <field id="loginInput" textToType="someLogin"/>
+        <field id="passwordInput" textToType="SomePassword"/>
+        <button id="DoLoginBtn"/>
+        
+        <button id="search"></button>
+        <webelement id="orderItem" action="isExists"/>
+        <screenshot />
+        <snapshot/>
+	</test>
+</testcase>

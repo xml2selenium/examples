@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines Routines.xsd"
+	tags="download, M25">
+	
+	<test name="Download text file" tags="download, M25">
+		<navigate to="http://localhost:${jetty.port}/test/download/download.html" />
+		
+		<webelement action="isExists" id="downloadFile" />				
+		<webelement action="download" id="downloadFile" returnValueName="path"/>
+		
+		<assert first="path" action="variableExists" />		
+				
+		<assert first="${path.substring(path.indexOf('xml2selenium-testcases'))}" second="xml2selenium${file.separator}test${file.separator}frameworkTests${file.separator}actions${file.separator}Download#xml${file.separator}Download text file${file.separator}1.txt" action="isContainsText" />
+		
+		<assert first="${x2s.util.FileUtil.getSize(path)}" second="22" action="equals"/>
+		
+	</test>
+	
+	<test name="Download text file with inner path" tags="download, M25">
+		<navigate to="http://localhost:${jetty.port}/test/download/download.html" />
+		
+		<webelement action="isExists" id="includeFile" />				
+		<webelement action="download" id="includeFile" returnValueName="path"/>
+		
+		<assert first="path" action="variableExists" />		
+		<assert first="${path.substring(path.indexOf('xml2selenium-testcases'))}" second="xml2selenium${file.separator}test${file.separator}frameworkTests${file.separator}actions${file.separator}Download#xml${file.separator}Download text file with inner path${file.separator}includeFile.txt" action="isContainsText" />
+		
+		<assert first="${x2s.util.FileUtil.getSize(path)}" second="21" action="equals"/>
+		
+	</test>
+	
+	
+	<test name="Download image" tags="download, M25">
+		<navigate to="http://localhost:${jetty.port}/test/download/download.html" />
+		
+		<webelement action="isExists" id="image" />				
+		<webelement action="download" id="image" returnValueName="path"/>
+		
+		<assert first="path" action="variableExists" />		
+		<assert first="${path.substring(path.indexOf('xml2selenium-testcases'))}" second="xml2selenium${file.separator}test${file.separator}frameworkTests${file.separator}actions${file.separator}Download#xml${file.separator}Download image${file.separator}1.png" action="isContainsText" />
+		
+		<assert first="${x2s.util.FileUtil.getSize(path)}" second="536" action="equals"/>
+	</test>
+	
+	 
+	<test name="Download nonexist file" tags="download, M25" expected="error"
+		expectedException="FrameworkException" expectedMessage="File 'nonfile' does not exist.">
+		<navigate to="http://localhost:${jetty.port}/test/download/download.html" />
+		
+		<webelement action="isExists" id="nonFile" />				
+		<webelement action="download" id="nonFile" returnValueName="path"/>
+				
+	</test>
+	
+	<test name="Download nonexist image" tags="download, M25" expected="error"
+		expectedException="FrameworkException" expectedMessage="File 'nonimage' does not exist.">
+		<navigate to="http://localhost:${jetty.port}/test/download/download.html" />
+		
+		<webelement action="isExists" id="nonImg" />				
+		<webelement action="download" id="nonImg" returnValueName="path"/>				
+				
+	</test>
+	
+	<test name="Download file from element without href" tags="download, M25" 
+	 	expected="error" expectedException="FrameworkException"
+	 	expectedMessage="The element you have specified does not link to anything.">
+		<navigate to="http://localhost:${jetty.port}/test/download/download.html" />		
+		<webelement action="isExists" id="noLink" />				
+		<webelement action="download" id="noLink" returnValueName="path"/>							
+	</test>	
+	
+	<test name="Download file without href and without download dialog" tags="download, M27" 
+	 	expected="error" expectedException="FrameworkException"
+	 	expectedMessage="File is not downloaded. Try using the attribute [expectedDownload='true'] for the element that causes a file downloading.">
+		<navigate to="http://localhost:${jetty.port}/test/download/download.html" />
+		<webelement action="isExists" id="noLink" />				
+		<webelement action="click" id="noLink" />		
+		<assert action="fileDownloaded" first="nolinkpath"/>
+	</test>	
+	
+	<test name="Download file and check fileDownloaded" tags="download, M28">
+		<navigate to="http://localhost:${jetty.port}/test/download/download.html" />
+		<webelement action="isExists" id="image" />				
+		<webelement action="download" id="image" expectedDownload="true"/>		
+				
+		<assert action="fileDownloaded" first="filePath" />
+		
+		<assert first="filePath" action="variableExists" />		
+		<assert first="${filePath.substring(filePath.indexOf('xml2selenium-testcases'))}" second="xml2selenium${file.separator}test${file.separator}frameworkTests${file.separator}actions${file.separator}Download#xml${file.separator}Download file and check fileDownloaded${file.separator}1.png" action="isContainsText" />
+		
+		<assert first="${x2s.util.FileUtil.getSize(filePath)}" second="536" action="equals"/>
+	</test>
+	
+	
+</testcase>

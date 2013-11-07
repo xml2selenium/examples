@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><root><TestCase><Test><navigate to="http://localhost:${jetty.port}/test/specialSearch.html"/><find id="search"/><find id="search"/></Test></TestCase></root>

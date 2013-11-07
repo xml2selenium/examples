@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	We expected exception in test-case, but no exception were thrown.
+ -->
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	expectedException="FileNotFoundException">
+
+	<test name="Test in wrong test-case" />
+</testcase>

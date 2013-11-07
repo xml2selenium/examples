@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	tags="framework, frames">
+
+	<!-- 
+		4 levels of frame inheritance
+		ID: 34
+	 -->
+	<test name="4 levels of frame inheritance [34]" tags="frames, inheritance">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+
+		<frame ref="AppLogin">
+			<field ref="loginField" id="loginInput" textToType="someLogin"></field>
+			<field ref="passwordField" cssSelector="#passwordInput"
+				textToType="somePwd"></field>
+			<button id="DoLoginBtn" />
+		</frame>
+
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+
+		<frame ref="AppLogin2" extends="AppLogin">
+			<field ref="loginField" id="loginInput" textToType="someLogin2"></field>
+		</frame>
+
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+
+		<frame ref="AppLogin3" extends="AppLogin2">
+			<field ref="passwordField" cssSelector="#passwordInput" textToType="somePwd3"></field>
+		</frame>
+
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+
+		<frame ref="AppLogin4" extends="AppLogin3">
+			<field ref="loginField" id="loginInput" textToType="someLogin4"></field>
+			<field ref="passwordField" cssSelector="#passwordInput" textToType="somePwd4"></field>
+		</frame>
+	</test>
+
+	<!-- 
+		Adding new elements in child frame. 
+		ID: 35
+	-->
+	<test name="Adding new elements in child frame [35]" tags="frames, inheritance">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+
+		<!-- 1. Type login and password to fields, but don't press login button -->
+		<frame ref="AppLogin">
+			<field ref="field" id="loginInput" textToType="someLogin" />
+		</frame>
+
+		<!-- 2. Also type login and password, but press button -->
+
+		<frame ref="AppLogin2" extends="AppLogin">
+			<field ref="field" cssSelector="#passwordInput" textToType="somePwd" />
+		</frame>
+		
+		<button id="DoLoginBtn" />
+	</test>
+
+	<!-- 
+		Frames as inner elements of another frame. 4 levels of composition.
+		ID: 36
+	 -->
+	<test name="Frames as inner elements of another frame [36]" tags="frames, inheritance, innerFrames">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+
+		<frame ref="TypeLogin">
+			<field ref="loginField" id="loginInput" textToType="someLogin"></field>
+		</frame>
+
+		<frame ref="TypePassword">
+			<field ref="passwordField" cssSelector="#passwordInput" textToType="somePwd"></field>
+		</frame>
+
+		<frame ref="TypePasswordAndLogin">
+			<frame extends="TypeLogin" />
+			<frame extends="TypePassword" />
+		</frame>
+
+		<frame ref="LoginToSystem">
+			<frame extends="TypePasswordAndLogin" />
+			<button id="DoLoginBtn" />
+		</frame>
+
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+
+		<frame ref="LoginToSystemAndCheckSomething">
+			<frame extends="LoginToSystem" />
+			<webelement id="orderItem" action="isExists" />
+		</frame>
+	</test>
+
+	<!-- 
+		Same elements in frames.
+		ID: 37
+	 -->
+	<test name="Same elements in one frame [37]" tags="frames, sameElements">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+
+		<frame>
+			<field id="loginInput" textToType="someLogin" />
+			<field id="loginInput" textToType="someLogin" />
+			<field cssSelector="#passwordInput" textToType="somePwd" />
+			<field cssSelector="#passwordInput" textToType="somePwd" />
+			<field cssSelector="#passwordInput" textToType="somePwd" />
+			<field id="loginInput" textToType="someLogin" />
+			<field id="loginInput" textToType="someLogin" />
+			<button id="DoLoginBtn" />
+		</frame>
+	</test>
+	
+	<test name="Test separate scopes for frames" tags="frames, scopes">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		
+		<frame>
+			<field ref="r1" id="loginInput" textToType="lgn"/>
+		</frame>
+		
+		<frame>
+			<field ref="r1" id="loginInput" textToType="lgn"/>
+		</frame>
+		
+		<webelement id="loginInput" action="isContainsText" text="lgn"/>
+	</test>
+</testcase>

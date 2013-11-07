@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	tags="framework, defaultDelay">
+
+	<test name="Wait for 10 seconds" tags="defaultDelay">
+		<defaultdelay time="10000" />
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</test>
+
+	<test name="Wait for 6 seconds on non existent element [69]"
+		expected="error" where="failElement" expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkWebDriverException"
+		expectedMessage="Can not find element on web page by id=unknownId"
+		tags="defaultDelay">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+
+		<defaultdelay time="6700" />
+		<field id="unknownId" ref="failElement" textToType="text" />
+	</test>
+	
+	<test name="Wait for 10 seconds, time gets from variable" tags="defaultDelay">
+		<variable ref="var1" value="10000" />
+		<defaultdelay time="${var1}" />
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</test>
+	
+	<test name="Wait for 10 seconds, time gets from variable, but variable is not a number" tags="defaultDelay" expectedException="FrameworkException" expectedMessage="Cannot convert value 'notanumber' to long!">
+		<variable ref="var1" value="notanumber" />
+		<defaultdelay time="${var1}" />
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</test>
+
+</testcase>

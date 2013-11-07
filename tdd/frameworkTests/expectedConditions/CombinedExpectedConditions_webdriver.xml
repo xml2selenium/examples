@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCase>
+	<Test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</Test>
+	<Test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</Test>
+	<Test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</Test>
+	<Test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</Test>
+	<Test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</Test>
+	<Test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</Test>
+	<Test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</Test>
+	<Test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</Test>
+	<Test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</Test>
+	<Test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</Test>
+	<Test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</Test>
+	<Test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</Test>
+	<Test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</Test>
+</TestCase>

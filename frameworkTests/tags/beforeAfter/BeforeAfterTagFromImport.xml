@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	description="Test Before and After tags" tags="framework, before, after">
+	
+	<import name="i" resource="ImportWithBeforeAfter.xml"/>
+	
+	<before extends="i:before"/>
+	
+	<test name="Test1 with Before and After tags" tags="before, after">
+		<webelement id="loginInput" action="isContainsText" text="lgn"/>
+		<webelement id="passwordInput" action="isContainsText" text="passwd"/>
+	</test>
+	
+	<test name="Test2 with Before and After tags" tags="before, after">
+		<webelement id="loginInput" action="isContainsText" text="lgn"/>
+		<webelement id="passwordInput" action="isContainsText" text="passwd"/>
+	</test>
+	
+	<after extends="i:after"/>
+</testcase>

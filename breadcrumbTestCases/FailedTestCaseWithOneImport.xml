@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	tags="breadcrumb">
+
+	<import resource="import3.xml" name="appElements" />
+
+	<test name="Failed test with one import" tags="breadcrumb">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"></navigate>
+
+		<webelement id="loginInput" />
+		
+			<!-- 
+			
+			comment
+			
+			 -->
+
+		<button extends="appElements:loginButton" />
+		
+	
+
+		<webelement id="logoutLink" action="isExists" />
+	</test>
+</testcase>

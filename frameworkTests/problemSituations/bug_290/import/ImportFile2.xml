@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<frame ref="check_div">
+		<webelement id="d1" action="isExists"/>
+	</frame>
+</imports>

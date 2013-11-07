@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../../xml2selenium-core/src/main/resources/Routines.xsd ">
+
+	<field id="loginInput" ref="login" textToType="12345" clearOldText="false"/>
+	<field id="passwordInput" ref="password" textToType="password_11111" clearOldText="false"/>
+</imports>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	tags="framework, common, container, ref">
+	
+	<test name="Use two elements with same 'ref' in container 'Test'" tags="common, container, test, ref, negative" 
+			expected="error" expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkException"
+			expectedMessage="Element 'Field' with ref = 'field' already exists in container 'Test'. You need to remove 'ref' duplication.">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<field ref="field" id="loginInput" textToType="login_1"/>      	
+      	<field ref="field" id="passwordInput" textToType="password_1"/>
+	</test>
+	
+	<test name="Use element with empty 'ref' in container 'Test'" tags="common, container, test, ref, negative"
+			expected="error" expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkException"
+			expectedMessage="Empty 'ref' in element 'Field' at container 'Test'">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<field ref="loginField" id="loginInput" textToType="login_1"/>      	
+      	<field ref="" id="passwordInput" textToType="password_1"/>
+	</test>
+	
+	<test name="Use all elements without 'ref' in container 'Test'" tags="common, container, test, ref">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<field id="loginInput" textToType="login_1"/>      	
+      	<field id="passwordInput" textToType="password_1"/>
+	</test>
+	
+	<test name="Use two elements with same 'ref' in container 'Frame'" tags="common, container, frame, ref, negative" 
+			expected="error" expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkException"
+			expectedMessage="Element 'Field' with ref = 'field' already exists in container 'Frame'. You need to remove 'ref' duplication.">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<frame>
+			<field ref="field" id="loginInput" textToType="login_1"/>      	
+	      	<field ref="field" id="passwordInput" textToType="password_1"/>
+      	</frame>
+	</test>
+	
+	<test name="Use element with empty 'ref' in container 'Frame'" tags="common, container, frame, ref, negative"
+			expected="error" expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkException"
+			expectedMessage="Empty 'ref' in element 'Field' at container 'Frame'">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<frame>
+			<field ref="loginField" id="loginInput" textToType="login_1"/>      	
+		    <field ref="" id="passwordInput" textToType="password_1"/>
+      	</frame>
+	</test>
+	
+	<test name="Use all elements without 'ref' in container 'Frame'" tags="common, container, frame, ref">
+		<frame>
+			<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+			
+			<field id="loginInput" textToType="login_1"/>      	
+	      	<field id="passwordInput" textToType="password_1"/>
+      	</frame>
+	</test>
+</testcase>

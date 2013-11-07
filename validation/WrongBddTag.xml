@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	description="TestCase for bdd testing" tags="bdd">
+
+	<test name="Open page and fill loginInput" description="" tags="bdd">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<bdd message="" />
+		<frame>
+			<field id="loginInput" textToType="someLogin" />
+		</frame>
+	</test>
+</testcase>

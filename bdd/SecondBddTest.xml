@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../xml2selenium-plugin-tag/xml2selenium-base-tag/src/main/resources/xml2selenium.xsd"
+	description="Basic test case" tags="bdd">
+	<test name="Testing bdd functionality" tags="bdd">
+		<navigate to="http://localhost:${jetty.port}/test/checkbox.html" />
+		<checkbox id="checkboxId1" />
+		<bdd message="Bdd1"></bdd>
+		<checkbox id="checkboxId1" action="isEnabled" />
+		<checkbox id="checkboxId1" />
+		<frame>
+			<checkbox id="checkboxId1" />
+			<bdd message="Bdd1.1"></bdd>
+			<checkbox id="checkboxId1" />
+			<frame>
+				<checkbox id="checkboxId1" />
+				<bdd message="Bdd1.1.1"></bdd>
+				<checkbox id="checkboxId1" />
+			</frame>
+		</frame>
+		<frame>
+			<checkbox id="checkboxId1" />
+			<bdd message="Bdd1.2"></bdd>
+			<checkbox id="checkboxId1" />
+		</frame>
+		<checkbox id="checkboxId1" action="isDisabled" />
+	</test>
+
+	<test name="Yet another bdd test" tags="bdd">
+		<navigate to="http://localhost:${jetty.port}/test/checkbox.html" />
+		<bdd message="Empty"></bdd>
+		<bdd message="!Bdd1.1"></bdd>
+		<checkbox id="checkboxId1" />
+		<checkbox id="checkboxId1" action="isEnabled" />
+		<checkbox id="checkboxId1" />
+		<frame>
+			<checkbox id="checkboxId1" />
+			<bdd message="!Bdd1.1"></bdd>
+			<checkbox id="checkboxId1" />
+			<frame>
+				<bdd message="Empty1"></bdd>
+				<bdd message="Empty2"></bdd>
+				<bdd message="Filled"></bdd>
+				<checkbox id="checkboxId1" />
+				<bdd message="!Bdd1.1.1"></bdd>
+				<checkbox id="checkboxId11" />
+			</frame>
+		</frame>
+		<frame>
+			<checkbox id="checkboxId1" />
+			<bdd message="Empty4"></bdd>
+			<bdd message="!Bdd1.2"></bdd>
+			<checkbox id="checkboxId1" />
+		</frame>
+		<checkbox id="checkboxId1" action="isDisabled" />
+		<bdd message="Empty5"></bdd>
+	</test>
+
+</testcase>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://www.jazzteam.org/Routines http://xml2selenium.com/schema/xml2selenium.xsd"
+          description="Basic test case" tags="base, simple">
+    
+    <test name="Simple test" description="Simple test for testing base framework functions"
+          tags="simple">
+        
+        <variable ref="var" value="Login Field"/>
+        <bdd message="${var}"/>
+        <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+        <screenshot/>
+        <snapshot/>
+        <frame>
+            <bdd message="Fill login field"/>
+            <field id="loginInput" textToType="someLogin"/>
+        </frame>
+        <frame>
+            <bdd message="Fill password field"/>
+            <field id="passwordInput" textToType="SomePassword"/>
+        </frame>
+        <frame>
+            <bdd message="Submit login and password"/>
+            <button id="DoLoginBtn"/>
+        </frame>
+
+        <bdd message="Search"/>
+        <frame>
+            <bdd message="Chech to element with id 'orderItem' is exists"/>
+            <button id="search"></button>
+            <webelement id="orderItem" action="isExists"/>
+            <screenshot/>
+            <snapshot/>            
+        </frame>
+    </test>
+  
+</testcase>

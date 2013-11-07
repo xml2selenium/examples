@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	tags="framework, common, field">
+	
+	<test name="Clear non empty field" tags="common, fields">
+	    <navigate to="http://localhost:${jetty.port}/test/search.html" />
+	    
+	    <field id="predifinedText" textToType="someAnotherText"/>
+	    <webelement id="predifinedText" action="isContainsText" text="someAnotherText"/>
+	</test>
+</testcase>

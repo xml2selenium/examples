@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../../xml2selenium-core/src/main/resources/Routines.xsd ">
+
+	<import name="bundle" resource="PlaceholderBundle.xml" />
+	
+	<test name="Use frame without body" tags="placeholder">
+		<frame extends="bundle:fillLogin"/>
+		<frame extends="bundle:fillLoginFirst"/>
+		<frame extends="bundle:checkFirst"/>	
+		<frame extends="bundle:doLogin"/>
+		<frame extends="bundle:doLogout"/>
+	</test>
+	
+	<test name="Override frame" tags="placeholder">
+		<frame extends="bundle:fillLogin"/>
+		<frame extends="bundle:fillLoginFirst"/>
+		<frame extends="bundle:checkFirst"/>
+		<frame extends="bundle:doLogin"/>
+<!-- 		Overriding frames -->
+		<frame extends="bundle:doLogout">
+			<frame ref="somethingAction">
+				<button id="search"/>
+			</frame>
+			<frame ref="somethingActionSecond">
+				<button extends="bundle:checkOrderSelectionButton"/>
+			</frame>
+		</frame>
+	</test>
+
+	<test name="Override frame with extends in internal frame" tags="placeholder">
+		<frame extends="bundle:fillLogin">
+			<frame ref="fillLoginInfo">
+				<frame extends="bundle:fillLoginSecond"/>
+			</frame>
+		</frame>
+		<frame extends="bundle:checkSecond"/>
+	</test>
+	
+	<test name="Override frame with extends" tags="placeholder">
+		<frame extends="bundle:fillLogin">
+			<frame ref="fillLoginInfo" extends="bundle:fillLoginSecond"/>
+		</frame>
+		<frame extends="bundle:checkSecond"/>
+	</test>
+	
+	<test name="Override frame with empty element and empty frame" tags="placeholder">
+		<frame extends="bundle:fillLogin"/>
+		<frame extends="bundle:fillLoginFirst"/>
+		<frame extends="bundle:checkFirst"/>
+		<frame extends="bundle:doLogin"/>
+		<frame extends="bundle:doAction">
+			<frame ref="additionalFrame">
+				<webelement cssSelector="#orderItem" action="isContainsText" text="Order selected item"/>
+			</frame>
+		</frame>
+	</test>
+	
+	<!-- Negative scenarios -->
+	<test name="Use in include frame without ref" expected="error" 
+		expectedException="java.lang.IllegalStateException"
+		expectedMessage="Element 'Frame' cannot contains in 'Frame' because has not 'ref' attribute, or 'ref' attribute is empty, or parent Frame has not element with same 'ref'"
+		tags="placeholder, negative">
+		<frame extends="bundle:fillLogin"/>
+		<frame extends="bundle:fillLoginFirst"/>
+		<frame extends="bundle:checkFirst"/>
+		<frame extends="bundle:doLogin"/>
+<!-- 		Overriding frames -->
+		<frame extends="bundle:doLogout">
+			<frame ref="somethingAction">
+				<button id="search"/>
+			</frame>
+			<frame ref="somethingActionSecond">
+				<button extends="bundle:checkOrderSelectionButton"/>
+			</frame>
+<!-- 			Illegal frame without ref -->
+			<frame>
+				<button ref="bundle:checkOrderSelectionButton"/>
+			</frame>
+		</frame>
+	</test>
+
+	<test name="Use in include frame with new ref"  expected="error"
+		expectedException="java.lang.IllegalStateException"
+		expectedMessage="Element 'Frame' cannot contains in 'Frame' because has not 'ref' attribute, or 'ref' attribute is empty, or parent Frame has not element with same 'ref'"
+		tags="placeholder, negative">
+				<frame extends="bundle:fillLogin"/>
+		<frame extends="bundle:fillLoginFirst"/>
+		<frame extends="bundle:checkFirst"/>
+		<frame extends="bundle:doLogin"/>
+<!-- 		Overriding frames -->
+		<frame extends="bundle:doLogout">
+			<frame ref="somethingAction">
+				<button id="search"/>
+			</frame>
+<!-- 			Illegal frame with new ref  -->
+			<frame ref="newReference">
+				<button extends="bundle:checkOrderSelectionButton"/>
+			</frame>
+			<frame ref="somethingActionSecond">
+				<button extends="bundle:checkOrderSelectionButton"/>
+			</frame>
+		</frame>
+	</test>
+
+	<test name="Use in include element without fer"  expected="error" 
+  		expectedException="java.lang.IllegalStateException"
+		expectedMessage="Element 'Button' cannot contains in 'Frame' because has not 'ref' attribute, or 'ref' attribute is empty, or parent Frame has not element with same 'ref'"
+  		tags="placeholder, negative">
+		<frame extends="bundle:fillLogin"/>
+		<frame extends="bundle:fillLoginFirst"/>
+		<frame extends="bundle:checkFirst"/>
+		<frame extends="bundle:doLogin"/>
+<!-- 		Overriding frames -->
+		<frame extends="bundle:doLogout">
+			<frame ref="somethingAction">
+				<button id="search"/>
+			</frame>
+<!-- 			Illegal element without ref  -->
+			<button id="orderItem"/>
+		</frame>
+	</test>
+
+	<test name="Use in include element with new ref"  expected="error"
+  		expectedException="java.lang.IllegalStateException"
+		expectedMessage="Element 'Button' cannot contains in 'Frame' because has not 'ref' attribute, or 'ref' attribute is empty, or parent Frame has not element with same 'ref'"
+  		tags="placeholder, negative">
+		<frame extends="bundle:fillLogin"/>
+		<frame extends="bundle:fillLoginFirst"/>
+		<frame extends="bundle:checkFirst"/>
+		<frame extends="bundle:doLogin"/>
+<!-- 		Overriding frames -->
+		<frame extends="bundle:doLogout">
+<!-- 			Illegal element with new ref  -->
+			<button ref="newElement" id="search"/>
+		</frame>
+	</test>
+</testcase>

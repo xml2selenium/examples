@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	tags="framework, frames, override, extends">
+
+	<test name="Override elements in child frame" tags="frames, override, negative"
+			expected="error" expectedException="java.lang.IllegalStateException"
+			expectedMessage="No one from these locators is specified for element: id, subid, tag name, css selector. Cannot find element without locator.">
+		 <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		 
+		 <frame ref="frame1">
+		 	<field ref="loginField" id="loginInput" textToType="login_1"/>
+		 </frame>
+		 
+		 <webelement id="loginInput" action="isContainsText" text="login_1"/>
+		 
+		 <frame extends="frame1">
+		 	<field ref="loginField" textToType="login_2"/>
+		 </frame>
+	</test>
+	
+	<test name="Override frame" tags="frames, override">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<frame ref="A">
+			<frame ref="B">
+				<field id="loginInput" textToType="login_1"/>
+				<field id="passwordInput" textToType="password_1"/>
+			</frame>
+		</frame>
+		
+		<webelement id="loginInput" action="isContainsText" text="login_1"/>
+		<webelement id="passwordInput" action="isContainsText" text="password_1"/>
+		
+		<field id="loginInput" textToType="l2"/>
+		<field id="passwordInput" textToType="p2"/>
+		
+		<webelement id="loginInput" action="isContainsText" text="l2"/>
+		<webelement id="passwordInput" action="isContainsText" text="p2"/>
+				
+		<frame extends="A">
+			<frame ref="B">
+				<field id="passwordInput" textToType="password_2"/>
+			</frame>
+		</frame>
+		
+		<webelement id="loginInput" action="isContainsText" text="l2"/>
+		<webelement id="passwordInput" action="isContainsText" text="password_2"/>
+	</test>
+	
+	<test name="Override and extend inner frame at same time" tags="frames, override, inheritance">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		
+		<frame ref="E">
+			<field ref="passwordField" id="passwordInput" textToType="password_2"/>
+		</frame>
+		<webelement id="passwordInput" action="isContainsText" text="password_2"/>
+		
+		<frame ref="A">
+			<frame ref="B">
+				<field id="loginInput" textToType="login_1"/>
+				<field id="passwordInput" textToType="password_1"/>
+			</frame>
+		</frame>
+		<webelement id="loginInput" action="isContainsText" text="login_1"/>
+		<webelement id="passwordInput" action="isContainsText" text="password_1"/>
+		
+		<frame extends="A">
+			<frame ref="B" extends="E">
+				<field ref="passwordField" id="passwordInput" textToType="password_3"/>
+			</frame>
+		</frame>
+		<webelement id="passwordInput" action="isContainsText" text="password_3"/>
+	</test>
+</testcase>

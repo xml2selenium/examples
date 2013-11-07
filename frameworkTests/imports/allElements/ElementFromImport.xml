@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../../xml2selenium-core/src/main/resources/Routines.xsd "
+	tags="framework, imports">
+
+	<import name="elements" resource="ImportWithAllElements.xml" />
+
+	<test name="Button from import [39]" tags="imports, button">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<button extends="elements:loginButton" />
+		<webelement id="search" action="isExists" />
+	</test>
+
+	<test name="Field from import [40]" tags="imports, field">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<field extends="elements:loginField" />
+		<!-- TODO Then need to check text at login textbox, but we have not elements 
+			do this yet. -->
+	</test>
+
+	<test name="Frame from import [41]" tags="imports, frame">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<frame extends="elements:doLogin" />
+		<webelement id="search" action="isExists" />
+	</test>
+
+	<test name="Navigate from import [42]" tags="imports, navigate">
+		<navigate extends="elements:navigateToLoginPage" />
+		<webelement subId="DoLogin" action="isExists" />
+	</test>
+
+	<test name="Propetry from import [43]" tags="imports, property">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+
+		<field ref="failElement" subId="login" textToType="${AccountProps.login}" />
+		<field subId="password" textToType="${AccountProps.password}" />
+		<button subId="DoLogin" />
+
+		<webelement id="search" action="isExists" />
+	</test>
+
+	<test name="Variable from import [44]" tags="imports, variable">
+		<navigate ref="failElement"
+			to="http://${application.host}:${jetty.port}/test/login.html" />
+		<webelement subId="DoLogin" action="isExists" />
+	</test>
+	
+	<test name="defaultDelay from import [45]" 
+		expected="error"
+		where="failElement" expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkWebDriverException"
+		expectedMessage="Can not find element on web page by subId=lgn"
+		tags="imports, defaultDelay, negative">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+
+		<frame ref="failElement" extends="elements:errorEnterLoginWithdefaultDelay" />
+		<field subId="password" textToType="passwd" />
+		<button subId="DoLogin" />
+	</test>
+
+	<test name="WebElement from import [46]" tags="imports, webElement">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<webelement extends="elements:loginButtonAtWebElement" />
+		<webelement id="search" action="isExists" />
+	</test>
+
+	<test name="Use JavaScript from import [70]" tags="imports, javaScript">
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+		<script extends="elements:clickLoginButtonWithJavaScript" />
+		<webelement id="search" action="isExists" />
+	</test>
+</testcase>

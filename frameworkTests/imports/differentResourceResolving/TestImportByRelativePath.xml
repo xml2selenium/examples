@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="Basic test case" tags="base, simple">
+	
+	<import resource="Import.xml" name="byClasspathRoot" />
+    <import resource="src\test\resources\frameworkTests\imports\differentResourceResolving\Import2.xml" name="relativeImport"/>
+
+	<test name="Test import by relative path" description="Testing that importing xml import by relative path works" tags="import, relativePath">
+		<frame extends="byClasspathRoot:navigateAndScreenshot" />
+        <field id="loginInput" textToType="someLogin"/>
+        <field id="passwordInput" textToType="SomePassword"/>
+        <button id="DoLoginBtn"/>
+        
+        <button id="search"/>
+        <webelement id="orderItem" action="isExists"/>
+        <navigate extends="relativeImport:navigate" />
+	</test>
+</testcase>

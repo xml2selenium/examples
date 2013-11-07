@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../../xml2selenium-core/src/main/resources/Routines.xsd ">
+
+	<import name="import" resource="import.xml" />
+	
+	<test name="Negative use empty variables in import" tags="variable, negative">
+		<frame extends="import:loadPage"/>
+		<frame ref="errorEl" extends="import:fillLogin"/>
+	</test>
+
+	<test name="Override variables" tags="variable">
+		<variable extends="import:login" ref="login" value="log"/>
+		<variable extends="import:password" ref="password" value="pas"/>
+		<frame extends="import:loadPage"/>
+		<frame extends="import:fillLogin"/>
+		<field extends="import:loginField" action="isContainsText" text="log"/>
+		<field extends="import:passwordField" action="isContainsText" text="pas"/>
+	</test>
+	
+	<test name="Complex overriding variables in child frames" 
+			tags="variable, inheritance, frames, override, extends">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		 
+		<frame ref="A">
+			<variable ref="var1" value="value1"/>
+			<variable ref="var3" value="val"/>
+			<field ref="f1" id="loginInput" textToType="${var1}"/>
+			
+			<frame ref="innerA">
+				<variable ref="innerVar" value="passwd"/>
+				<field ref="f2" id="passwordInput" textToType="${innerVar}"/>
+			</frame>
+		</frame>
+		<webelement id="loginInput" action="isContainsText" text="value1"/>
+		<webelement id="passwordInput" action="isContainsText" text="passwd"/>
+		
+		<frame ref="B" extends="A">
+			<variable ref="var1" value="newValue1"/>
+			<field ref="f1" id="loginInput" textToType="${var1}"/>
+		</frame>
+		<webelement id="loginInput" action="isContainsText" text="newValue1"/>
+		
+		<frame ref="C" extends="B">
+			<frame ref="innerA">
+				<variable ref="innerVar" value="value3"/>
+				<field ref="f2" id="passwordInput" textToType="${innerVar}"/>
+			</frame>
+			
+			<field ref="f1" id="loginInput" textToType="${var3}"/>
+		</frame>
+		<webelement id="loginInput" action="isContainsText" text="val"/>
+		<webelement id="passwordInput" action="isContainsText" text="value3"/>
+	</test>
+</testcase>

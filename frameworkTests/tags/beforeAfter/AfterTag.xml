@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	description="Test After tag" tags="framework, after">
+	
+	<test name="Check element in After tag. Test1" tags="after, navigate">
+		<navigate to="http://localhost:${jetty.port}/test"/>
+	</test>
+	
+	<test name="Check element in After tag. Test2" tags="after, navigate">
+		<navigate to="http://localhost:${jetty.port}/test"/>
+	</test>
+	
+	<after>
+		<field id="loginInput" textToType="login_1"/>
+		<webelement id="loginInput" action="isContainsText" text="login_1"/>
+	</after>
+</testcase>

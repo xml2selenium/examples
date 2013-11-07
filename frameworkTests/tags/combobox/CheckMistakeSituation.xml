@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	tags="framework, combobox">
+
+	<test name="Check that wrong number throw exception" tags="combobox, mistake"
+		expectedException="FrameworkException" expectedMessage="Can't find item with 'id=comboBox' by number = '100000'">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<combobox id="comboBox" action="select" by="number" value="100000" />
+	</test>
+
+	<test name="Check that wrong value throw exception" tags="combobox, mistake"
+		expectedException="FrameworkException" expectedMessage="Can't find item with 'id=comboBox' by value = 'qwerty'">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<combobox id="comboBox" by="value" value="qwerty" />
+	</test>
+
+	<test name="Check that wrong text throw exception" tags="combobox, mistake"
+		expectedException="FrameworkException" expectedMessage="Can't find item with 'id=comboBox' by text = 'Some mistake text'">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<combobox id="comboBox" by="text" value="Some mistake text" />
+	</test>
+
+	<test name="Check that not digital number throw exception" tags="combobox, mistake"
+		expectedException="FrameworkException" expectedMessage="Number need to be digital">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<combobox id="comboBox" by="number" value="Green" />
+	</test>
+</testcase>

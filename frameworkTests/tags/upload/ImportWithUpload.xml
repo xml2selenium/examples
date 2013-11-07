@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
+	<variable ref="uploadingFile" value="resource-file"/>
+	
+	<upload ref="upload" id="fileUpload" resource="${uploadingFile}"/>
+	
+	<frame ref="uploadInFrameFromImport">
+		<upload ref="u1" id="fileUpload" resource="${uploadingFile}"/>
+	</frame>
+</imports>

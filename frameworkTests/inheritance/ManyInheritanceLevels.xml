@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	tags="framework, inheritance, inheritanceLevels">
+
+	<!-- 
+		4 levels of inheritance
+		ID: 10
+	 -->
+	<test name="4 levels of inheritance [10]"
+			tags="inheritance, inheritanceLevels">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"></navigate>
+		
+		<field ref="loginButton" id="loginInput" />
+		<field ref="loginButton2" extends="loginButton" />
+		<field ref="loginButton3" extends="loginButton2" />
+		<field ref="loginButton4" extends="loginButton3" textToType="someLogin" />
+
+		<field id="passwordInput" textToType="SomePassword" />
+		<button id="DoLoginBtn" />
+
+		<button ref="searchBtn" id="search"></button>
+		<webelement ref="orderBtn" id="orderItem" action="isExists" />
+	</test>
+	
+	<!-- 
+		Inheritance of different selector attributes
+		ID: 11
+	 -->
+	<test name="Inheritance with different selectors [11]"
+			tags="inheritance, selector">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"></navigate>
+		
+		<field ref="loginField" id="loginInput" />
+		
+		<field extends="loginField" cssSelector="#loginInput" textToType="SomePassword" />
+		<field id="passwordInput" textToType="SomePassword" />
+		<button ref="loginButton" id="DoLoginBtn" />
+
+		<button extends="loginButton" cssSelector="#search" />
+		<webelement id="orderItem" action="isExists" />
+	</test>
+	
+	<!-- 
+		Cycle inheritance (a extends b, b extends c, c extends a)
+		TODO add more specified
+		ID: 12
+	 -->
+	<test
+		expected="error" name="Cyclic inheritance [12]"
+			tags="inheritance, cyclicInheritance">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"></navigate>
+		
+		<field ref="loginButton" extends="loginButton2" id="loginInput" />
+		<field ref="loginButton1" extends="loginButton" />
+		<field ref="loginButton2" extends="loginButton" textToType="SomeLogin" />
+		<field id="passwordInput" textToType="SomePassword" />
+		<button id="DoLoginBtn" />
+	</test> 	
+	
+	<!-- 
+		Numbers and special characters in elements refs and extends
+		ID: 13
+	 -->
+
+	 <!-- 
+	<test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html"></navigate>
+		
+		<field ref="123=_%@#!^&*()-+\/" id="loginInput" />
+		<field extends="123=_%@#!^&*()-+\/" textToType="SomeLogin" />
+		<field id="passwordInput" textToType="SomePassword" />
+		<button id="DoLoginBtn" />
+	</test>
+	 --> 	
+</testcase>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../../xml2selenium-core/src/main/resources/Routines.xsd ">
+	!!! ILLEGAL TEXT !!!!
+	<button ref="loginButton" subId="DoLogin"/>
+	
+	<field ref="loginField" subId="login" textToType="login-login"/>
+	
+</imports>

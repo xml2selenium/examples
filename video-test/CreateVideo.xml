@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../xml2selenium-plugin-tag/xml2selenium-base-tag/src/main/resources/xml2selenium.xsd"
+description="Basic test case for create video" tags="base, simple, video">
+
+	<test name="Video1" description="Simple test for create video" tags="video">
+		<video action="start"/>
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		<video action="stop"/>
+	</test>
+</testcase>

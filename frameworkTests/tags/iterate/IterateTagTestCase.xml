@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          description="Basic test case" tags="base, simple">
+
+    <import name="elements" resource="frame.xml"/>
+    <import name="elements2" resource="frame2.xml"/>
+
+    <test name="Iterate by string of parameters" tags="iterate">
+        <navigate to="http://localhost:${jetty.port}/test/iterate.html"/>
+        <iterate for="1,2,3,4" var="i" run="elements:type_operations"/>
+        <iterate for="1,2,3,4" var="i" run="elements:compare_operations"/>
+    </test>
+
+    <test name="Iterate by webelements selected throught XPath" tags="iterate">
+        <navigate to="http://localhost:${jetty.port}/test/iterate.html"/>
+        <webelement xpath="//input" ref="input_elements"/>
+        <iterate for="input_elements" var="xy" run="elements2:input_operations"/>
+        <webelement xpath="//div[string-length(@id) &gt; 0]" ref="divs"/>
+        <iterate for="input_elements" var="z" run="elements2:exist_operations"/>
+    </test>
+
+    <test name="Iterate by webelements selected throught sudId" tags="iterate">
+        <navigate to="http://localhost:${jetty.port}/test/iterate.html"/>
+        <webelement subId="d" ref="subid_divs"/>
+        <iterate for="subid_divs" var="z" run="elements2:exist_operations"/>
+        <webelement subId="text" ref="subid_inputs"/>
+        <iterate for="subid_inputs" var="variable" run="elements2:type_operations_webelements"/>
+    </test>
+
+    <test name="Iterate
+		by webelements selected throught tagName"
+          tags="iterate">
+        <navigate to="http://localhost:${jetty.port}/test/iterate.html"/>
+        <webelement tagName="div" ref="tagName_divs"/>
+        <iterate for="tagName_divs" var="z" run="elements2:exist_operations"/>
+    </test>
+
+    <test name="Iterate by webelements
+		selected throught cssSelector"
+          tags="iterate">
+        <navigate to="http://localhost:${jetty.port}/test/iterate.html"/>
+        <webelement cssSelector=".clazz" ref="cssSelector_divs"/>
+        <iterate for="cssSelector_divs" var="z" run="elements2:exist_operations"/>
+    </test>
+
+    <test name="Iterate with one element" tags="iterate">
+        <navigate to="http://localhost:${jetty.port}/test/iterate.html"/>
+        <webelement subId="text1" ref="subid_input"/>
+        <iterate for="subid_input" var="variable" run="elements2:type_operations_webelements"/>
+    </test>
+
+    <test name="Element
+		not found" tags="iterate"
+          expectedException="AssertionError" expectedMessage="Element with 'subId=q' is not exists">
+        <navigate to="http://localhost:${jetty.port}/test/iterate.html"/>
+        <webelement subId="q" ref="subid_input"/>
+        <iterate for="subid_input" var="variable" run="elements2:type_operations_webelements"/>
+    </test>
+
+
+    <test name="When frame placed in test" tags="iterate">
+        <navigate to="http://localhost:${jetty.port}/test/iterate.html"/>
+        <variable ref="i" value="1"/>
+        <frame ref="type_operations_in_test">
+            <field id="text${i}" textToType="${i} from type_operations_in_test"/>
+        </frame>
+
+        <iterate for="1,2,3,4" var="i" run="type_operations_in_test"/>
+    </test>
+
+    <test name="Несуществующий фрейм" tags="error, iterate, M29" expectedException="FrameworkException"
+          expectedMessage="Can't find frame='exist_operations' for element 'web_elements'.">
+        <navigate to="http://localhost:${jetty.port}/test/iterate.html" />
+        <webelement subId="d" ref="web_elements"/>
+        <webelement xpath="//input" ref="input_elements"/>
+        <iterate for="web_elements" var="z" run="exist_operations" />
+        <iterate for="input_elements" var="var1" run="noexistFrame" />
+    </test>
+</testcase>

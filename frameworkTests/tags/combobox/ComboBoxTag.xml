@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	tags="framework, combobox">
+
+	<import name="elements"
+		resource="ImportComboBox.xml" />
+
+	<test name="Use select action" tags="combobox">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<combobox id="comboBox" action="select" by="number" value="1" />
+		<combobox id="comboBox" action="isContainsText" text="Black" />
+	</test>
+
+	<test name="Use default action" tags="combobox">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<combobox id="comboBox" by="number" value="0" />
+		<combobox id="comboBox" action="isContainsText" text="Blue" />
+	</test>
+
+	<test name="Use text option locator" tags="combobox">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<combobox id="comboBox" by="text" value="Green" />
+		<combobox id="comboBox" action="isContainsText" text="Green" />
+	</test>
+
+	<test name="Use value option locator" tags="combobox">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<combobox id="comboBox" by="value" value="orange" />
+		<combobox id="comboBox" action="isContainsText" text="Orange" />
+	</test>
+	
+	<test name="Get integer value from property" tags="combobox">
+		<property
+			resource="frameworkTests/tags/combobox/property-tag-combobox.properties"
+			name="propertyValue" />
+
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<combobox id="comboBox" action="select" by="number"
+			value="${propertyValue.valueInt}" />
+		<combobox id="comboBox" action="isContainsText" text="Black" />
+	</test>
+
+	<test name="Get string value from property" tags="combobox">
+		<property
+			resource="frameworkTests/tags/combobox/property-tag-combobox.properties"
+			name="propertyValue" />
+
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<combobox id="comboBox" by="value" value="${propertyValue.valueString}" />
+		<combobox id="comboBox" action="isContainsText" text="Orange" />
+	</test>
+
+	<test description="Select some option and check after that current option text is not previous option text" tags="combobox" name="Check that select don't contain text">
+		<property
+			resource="frameworkTests/tags/combobox/property-tag-combobox.properties"
+			name="propertyValue" />
+
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<combobox id="comboBox" action="select" by="value" value="${propertyValue.valueString}" />
+		<combobox id="comboBox" action="isNotContainsText" text="Black" />
+	</test>
+
+	<test description="Extends ComboBox attributes" name="Check inheritance" tags="combobox">
+
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		
+		<combobox  id="comboBox" ref="extendedComboBox" action="isDisplayed"  />
+		<webelement extends="extendedComboBox"  />
+	</test>
+
+	<test name="Check import" tags="combobox" description="Import ">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<combobox extends="elements:selectOrange" />
+		<combobox extends="elements:checkOrange" />
+	</test>
+
+</testcase>
+	

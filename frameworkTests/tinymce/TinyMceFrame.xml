@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd">
+
+	<import name="tinymce" resource="tinymce/TinyMceTextPrint.xml" />
+	<import name="tinymceRead" resource="tinymce/TinyMceTextRead.xml" />
+
+    <frame extends="tinymce:tinyMceTextPrint" ref="putText">
+        <variable ref="text" value="some text 1" />
+        <variable ref="instance" value="tiny" />
+    </frame>
+
+    <frame extends="tinymceRead:tinyMceTextRead" ref="readText">
+        <variable ref="instance" value="tiny" />
+        <!--<variable ref="gettingText" name="gettingText" value="${gettingText}"/>-->
+    </frame>
+</imports>

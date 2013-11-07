@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	description="Get text from page. Use attribute 'getText' from webelement"
+	tags="framework, common, getText">
+
+	<property name="value" resource="value.properties" />
+	<import name="imports" resource="imports.xml" />
+
+	<!-- This is not work! Now we can't get text from div frim import -->
+	<test name="Get text from div from import" tags="framework, common, getText, import">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<!-- Раскоментировать когда будет решена проблема: 
+			Parameter varName cannot be null or empty
+		-->	
+		<!--<webelement extends="imports:someTextFromImport" ref="someText" />-->
+		<webelement id="someText" action="getText" returnValueName="savedText" />
+		<field id="maxWeight" textToType="${savedText}" />
+		<webelement id="maxWeight" action="isContainsText" text="${value.div}" />
+
+	</test>
+
+	<test name="Get text from button" tags="framework, common, getText, button">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<webelement id="search" action="getText" returnValueName="savedText" />
+		<field id="maxWeight" textToType="${savedText}" />
+		<webelement id="maxWeight" action="isContainsText" text="${value.button}" />
+	</test>
+
+	<test name="Get text from div" tags="framework, common, getText">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<webelement id="someText" action="getText" returnValueName="savedText" />
+		<field id="maxWeight" textToType="${savedText}" />
+		<webelement id="maxWeight" action="isContainsText" text="${value.div}" />
+	</test>
+
+	<test name="Get text from сombobox" tags="framework, common, getText, combobox">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+
+		<combobox id="comboBox" by="value" value="green" />
+		<webelement id="comboBox" action="getText" returnValueName="savedText" />
+		<field id="maxWeight" textToType="${savedText}" />
+		<webelement id="maxWeight" action="isContainsText" text="${value.combobox.green}" />
+
+		<webelement id="comboBox" action="isContainsText" text="${value.combobox.green}" />
+	</test>
+
+	<!-- This is not work! Now we can't put text into variable. bug: http://178.79.169.112:8090/projects/xml2selenium/ticket/65 -->
+	<test name="Get text from import and put into var" tags="framework, common, 
+		getText, import">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<!-- This is not work! Now we can't put text into variable. bug: http://178.79.169.112:8090/projects/xml2selenium/ticket/65 
+			Как положить значение в переменную которая уже объявлена? <frame extends="imports:getTextFromDivAndPutIntoVar" 
+			/> <field id="maxWeight" textToType="${var}" /> <webelement id="maxWeight" 
+			action="isContainsText" text="${value.div}" /> -->
+
+		<webelement id="someText" action="getText" returnValueName="textForVar" />
+		<variable ref="var" value="${textForVar}" />
+		<field id="maxWeight" textToType="${var}" />
+		<webelement id="maxWeight" action="isContainsText" text="${value.div}" />
+	</test>
+</testcase>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		  description="если импорт файл по которому проходит иетрация, поместить в начало или середину списка
+		  			   то, итерация завершиться неудачей" 	
+		  tags="import, iterate, bug_290, M28">
+	
+	
+	<import resource="ImportFile_for_iterate.xml" name="importFile_for_iterate"/> 
+	<!-- просто импорты, которые созданы для количества -->
+	<import resource="import/ImportFile1.xml" name="importFile1"/>
+	<import resource="import/ImportFile2.xml" name="importFile2"/>
+	
+	<before>
+		<navigate to="http://localhost:${jetty.port}/test/iterate.html"/>
+	</before>
+		  
+	<test name="проверка iterate" description="проверка iterate с неправильным порядком импортов" tags="iterate" >
+		<iterate for="1,2,3,4" var="number" run="importFile_for_iterate:import_iterate"/>
+	</test>	  
+		  
+</testcase>	

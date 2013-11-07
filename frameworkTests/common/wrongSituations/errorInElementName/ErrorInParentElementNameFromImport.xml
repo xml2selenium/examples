@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	tags="framework, common, wrongSituations, negative">
+
+	<import name="i" resource="Import.xml"/>
+	
+	<test name="Error in parent element name from import" tags="common, wrongSituations, negative"
+			expected="error" where="failedElement"
+			expectedException="java.lang.IllegalStateException"
+			expectedMessage="Element 'loginField' not found in import 'i'">
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+		<field extends="i:loginField" ref="failedElement"/>
+	</test>
+</testcase>

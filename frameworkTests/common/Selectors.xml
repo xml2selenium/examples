@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	tags="framework, common, selectors">
+	
+	<!-- Selector: id -->
+	<test name="Correct id" description="Test for usage all available selectors [5]"
+			tags="common, selectors, id">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+      
+        <button id="DoLoginBtn"/>
+        
+        <button id="search"/>
+        <webelement id="orderItem" action="isExists"/>
+	</test>
+	
+	<test name="Element not found by id" description="Test for usage all available selectors [5]"
+			expected="error" where="failElement"
+			expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkWebDriverException"
+			expectedMessage="Can not find element on web page by id=lgn"
+			tags="common, selectors, id, notExistElement, negative">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+        
+        <field ref="failElement" id="lgn" textToType="someLogin"/>
+	</test>
+	
+	<!-- Selector: subId -->
+	<test name="Correct subId" description="Test for usage all available selectors [5]"
+			tags="common, selectors, subId">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+        
+        <field subId="login" textToType="someLogin"/>
+        <field subId="password" textToType="SomePassword"/>
+        <button subId="LoginBtn"/>
+        
+        <button id="search"></button>
+        <webelement id="orderItem" action="isExists"/>
+	</test>
+	
+	<test name="Element not found by subId" description="Test for usage all available selectors [5]"
+			expected="error" where="failElement"
+			expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkWebDriverException"
+			expectedMessage="Can not find element on web page by subId=lgn"
+			tags="common, selectors, subId, notExistElement, negative">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+        
+        <field ref="failElement" subId="lgn" textToType="someLogin"/>
+	</test>
+	
+	<!-- Selector: cssSelector -->
+	<test name="Correct cssSelector" description="Test for usage all available selectors [5]"
+			tags="common, selectors, cssSelector">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+        
+        <field cssSelector="#loginInput" textToType="someLogin"/>
+        <field cssSelector="#passwordInput" textToType="SomePassword"/>
+        <button cssSelector="#DoLoginBtn"/>
+        
+        <button cssSelector="#search"></button>
+        <webelement cssSelector="#orderItem" action="isExists"/>
+	</test>
+	
+	<test name="Element not found by cssSelector" description="Test for usage all available selectors [5]"
+			expected="error" where="failElement"
+			expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkWebDriverException"
+			expectedMessage="Can not find element on web page by cssSelector=#lgn"
+			tags="common, selectors, cssSelector, notExistElement, negative">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+        
+        <field ref="failElement" cssSelector="#lgn" textToType="someLogin"/>
+	</test>
+	
+	<!-- Selector: xpath -->
+	<test name="Correct xpath" description="Test for usage all available selectors [5]"
+			tags="common, selectors, xpath">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+        
+        <field xpath="id('loginInput')" textToType="someLogin"/>
+        <field xpath="id('passwordInput')" textToType="SomePassword"/>
+        <button xpath="id('DoLoginBtn')"/>
+        
+        <button xpath="id('search')"></button>
+        <webelement xpath="id('orderItem')" action="isExists"/>
+	</test>
+	
+	<test name="Element not found by xpath" description="Test for usage all available selectors [5]"
+			expected="error" where="failElement"
+			expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkWebDriverException"
+			expectedMessage="Can not find element on web page by xpath=id('lgn')"
+			tags="common, selectors, xpath, notExistElement, negative">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+        
+        <field ref="failElement" xpath="id('lgn')" textToType="someLogin"/>
+	</test>
+</testcase>

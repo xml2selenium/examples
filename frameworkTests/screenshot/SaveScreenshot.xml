@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	description="Basic test case"
+	tags="base, simple">
+	
+	<test name="Simple test" description="Simple test for testing base framework functions">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html"/>
+        
+        <!-- Test save screenshot without file prefix -->
+        <screenshot />
+        <field id="loginInput" textToType="someLogin"/>
+        <field id="passwordInput" textToType="SomePassword"/>
+        <button id="DoLoginBtn"/>
+        
+        <button id="search"></button>
+        <webelement id="orderItem" action="isExists"/>
+        
+        <!-- Test save screenshot without with file prefix -->
+        <screenshot filePrefix="myScreenshot" />
+	</test>
+</testcase>

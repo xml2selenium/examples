@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          description="all success" tags="empty, expected" expectedException="FrameworkException">
+</testcase>

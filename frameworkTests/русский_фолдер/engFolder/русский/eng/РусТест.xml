@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../../xml2selenium-core/src/main/resources/Routines.xsd"
+          tags="русский_путь">
+
+    
+    <test name="Тест с русским путем.">
+        <navigate to="http://localhost:${jetty.port}/test/tinymce.html"/>
+    </test>
+</testcase>

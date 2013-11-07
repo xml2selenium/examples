@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	expectedException="java.lang.IllegalStateException"
+	tags="framework, imports, namespaces">
+	
+	<!-- TODO[kslisenko] to allow this case we need to reimplement imports architecture. Do we really need this? -->	
+	
+	<!-- 
+		Import1 and Import2 have same namespaces
+		ID: 16
+	 -->
+    <import resource="Import1.xml" name="appElements" />
+    <import resource="Import2.xml" name="appElements" />
+    
+	<test name="Two imports with same namespace [16]"
+			tags="imports, namespaces">
+	    <navigate extends="appElements:basicLogin"></navigate>
+        
+        <field extends="appElements:loginName" textToType="someLogin" />
+        <field  extends="appElements:loginPwd" textToType="SomePassword" />
+        <button extends="appElements:checkLoginButton"/>
+        <button extends="appElements:loginButton" />
+
+        <button id="search" />
+        <webelement id="orderItem" action="isExists" />
+	</test>
+</testcase>

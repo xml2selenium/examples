@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	description="Basic test case for window tag" tags="window, M26">
+  
+ 	<test name="Assert for new window open in background and current" description="Test for check open new window in background and current"
+		tags="window, M26">		
+		<navigate to="http://localhost:${jetty.port}/test/tabs/window.htm" />		
+		<webelement ref="linkForNewTab" id="inNewTabWithTransition" action="isExists" />
+		<webelement extends="linkForNewTab" action="click" />
+		<window assert="newWindowOpened:background" /> 
+		<window action="goToNewWindow"/>
+		<window assert="newWindowOpened:current" /> 
+	</test>
+	
+	<test name="Get current window" description="Test for get current window and put in context"
+		tags="window, M26">		
+		<navigate to="http://localhost:${jetty.port}/test/tabs/window.htm" />		
+		<webelement ref="linkForNewTab" id="inNewTabWithTransition" action="isExists" />		
+		<window action="getCurrentWindow" ref="currentWindow"/>			
+		<assert first="currentWindow" action="variableExists" />		 
+	</test>
+	
+	<test name="Get new window" description="Test for get new window and put in context"
+		tags="window, M26">		
+		<navigate to="http://localhost:${jetty.port}/test/tabs/window.htm" />		
+		<webelement ref="linkForNewTab" id="inNewTabWithTransition" action="isExists" />		
+		<webelement extends="linkForNewTab" action="click" />		
+		<window action="getNewWindow" ref="newWindow"/>			
+		<assert first="newWindow" action="variableExists" />		 
+	</test>
+	
+	<test name="Get previous window" description="Test for get previous window and put in context"
+		tags="window, M26">		
+		<navigate to="http://localhost:${jetty.port}/test/tabs/window.htm" />		
+		<webelement ref="linkForNewTab" id="inNewTabWithTransition" action="isExists" />	
+		<webelement extends="linkForNewTab" action="click" />	
+		<window action="goToNewWindow"/>
+		<window action="getPreviousWindow" ref="previousWindow"/>			
+		<assert first="previousWindow" action="variableExists" />		 
+	</test>
+
+	<test name="Go to new window by default" description="Test for go new window by defaut if new window open"
+		tags="window, M26">		
+		<navigate to="http://localhost:${jetty.port}/test/tabs/window.htm" />		
+		<webelement ref="linkForNewTab" id="inNewTabWithTransition" action="isExists" />
+		<webelement extends="linkForNewTab" action="click" />		
+		<window action="goToNewWindow"/>
+	</test>
+	
+ 	<test name="Go to new window with problem" description="Test for go new window by defaut if new window not open"
+		tags="window, M26" expectedException="FrameworkException" expectedMessage="New window is not opened">		
+		
+		<window action="goToNewWindow"/>
+	</test>
+	
+	<test name="Go to new window with variable" description="Test for go new window witn variable"
+		tags="window, M26">		
+		<navigate to="http://localhost:${jetty.port}/test/tabs/window.htm" />		
+		<webelement ref="linkForNewTab" id="inNewTabWithTransition" action="isExists" />
+		<webelement extends="linkForNewTab" action="click" />				
+		<window action="goToNewWindow" newWindowRef="newWindow" currentWindowRef="currentWindow"/>
+		<assert first="newWindow" action="variableExists" />
+		<assert first="currentWindow" action="variableExists" />						 
+	</test>
+
+	<test name="Go to window with variable" description="Test for go window"
+		tags="window, M26">		
+		<navigate to="http://localhost:${jetty.port}/test/tabs/window.htm" />		
+		<webelement ref="linkForNewTab" id="inNewTabWithTransition" action="isExists" />
+		<webelement extends="linkForNewTab" action="click" />
+		<window action="getCurrentWindow" ref="previousExpected"/>
+		<window action="getNewWindow" ref="newExpected"/>				
+		<window action="goToWindow" where="newExpected" currentWindowRef="previousActual"/>
+		<window action="getCurrentWindow" ref="newActual"/>
+		
+		<assert first="previousExpected" action="variableExists" />	
+		<assert first="previousActual" action="variableExists" />	
+		<assert first="newExpected" action="variableExists" />	
+		<assert first="newActual" action="variableExists" />							 
+	</test>
+	
+	<test name="Go to window with unknow variable" description="Test for go window with unknow variable"
+		tags="window, M26" expectedException="FrameworkException" expectedMessage="Unknown value of attribute where [window] for element Window">		
+		<navigate to="http://localhost:${jetty.port}/test/tabs/window.htm" />		
+		<webelement ref="linkForNewTab" id="inNewTabWithTransition" action="isExists" />		
+		<window action="goToWindow" where="window" currentWindowRef="currentWindow"/>							 
+	</test>
+ 
+	<test name="Close window with variable" description="Test for close window"
+		tags="window, M26">		
+		<navigate to="http://localhost:${jetty.port}/test/tabs/window.htm" />		
+		<webelement ref="linkForNewTab" id="inNewTabWithTransition" action="isExists" />		
+		<window action="getCurrentWindow" ref="previousWindow"/>
+		<webelement extends="linkForNewTab" action="click" />		
+		<window action="goToNewWindow"/>
+		
+		<window action="closeWindow" what="previousWindow"/>														 
+	</test>
+
+	<test name="Close current window with variable" description="Test for close window"
+		tags="window, M26">		
+		<navigate to="http://localhost:${jetty.port}/test/tabs/window.htm" />		
+		<webelement ref="linkForNewTab" id="inNewTabWithTransition" action="isExists" />
+		<window action="getCurrentWindow" ref="previousWindow"/>
+		<webelement extends="linkForNewTab" action="click" />		
+		<window action="goToNewWindow"/>
+		<window action="getCurrentWindow" ref="newWindow"/>
+		<window action="closeCurrentAndGoToWindow" where="previousWindow"/>		
+	</test>
+
+	<test name="Close window with unknown variable" description="Test for close window with unknow variable"
+		tags="window, M26" expectedException="FrameworkException" expectedMessage="Unknown value of attribute what [null] for element Window">		
+		<navigate to="http://localhost:${jetty.port}/test/tabs/window.htm" />		
+		<window action="closeWindow"/>						 
+	</test>
+	<test name="Close current window with unknown variable" description="Test for close window with unknow variable"
+		tags="window, M26" expectedException="FrameworkException" expectedMessage="Unknown value of attribute where [null] for element Window">		
+		<navigate to="http://localhost:${jetty.port}/test/tabs/window.htm" />		
+		<window action="closeCurrentAndGoToWindow"/>							 
+	</test>
+	
+	<test name="Test for unknow assert" description="Test for check open new window with unknow assert parameters"
+		tags="window, M26" expectedException="FrameworkException" expectedMessage="Unknown assert [unknown] for element Window">		
+		<window assert="unknown" />
+	</test>
+	<test name="Test for unknow action" description="Test for check open new window with unknow action"
+		tags="window, M26" expectedException="FrameworkException" expectedMessage="Unknown action [unknown] for element Window">
+		<window action="unknown" />
+	</test>
+
+</testcase>

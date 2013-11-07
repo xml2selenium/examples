@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../xml2selenium-plugin-tag/xml2selenium-base-tag/src/main/resources/xml2selenium.xsd"
+          tags="base, javascript, confirm, expected">
+
+    <import resource="AlertFrame.xml" name="alertFrame"/>
+
+    <test name="Test basic alert frame" tags="base, javascript, confirm, expected, coverage" coverage="15">
+        <navigate to="http://localhost:${jetty.port}/test/alertPage.html"/>
+        <webelement id='booleanText' action="isContainsText" text="false"/>
+
+        <!--TODO-->
+        <!--override function alert, default return true, old problem resolver-->
+        <!-- <frame extends="alertFrame:returnTrue"/> -->
+
+        <webelement id="alert" action="click" showAlert="true"/>
+        <dialog action="getText" returnValueName="var1"/>
+        <dialog action="accept"/>
+        <webelement id='booleanText' action="isContainsText" text="true"/>
+
+        <navigate to="http://localhost:${jetty.port}/test"/>
+        <field id="loginInput" textToType="${var1}"/>
+        <webelement id='loginInput' action="isContainsText" text="alert!"/>
+    </test>
+
+    <test name="Test basic alert" tags="base, javascript, confirm, expected, coverage, M29" coverage="15">
+        <navigate to="http://localhost:${jetty.port}/test/alertPage.html"/>
+        <webelement id="prompt" action="click" showAlert="true"/>
+        <dialog action="typeText" textToType="prompt"/>
+        <dialog action="accept"/>
+        <webelement id='booleanText' action="isContainsText" text="prompt"/>
+    </test>
+
+    <test name="Test no existed alert" description="Пытаемя обработать несуществующий dialog"
+          tags="base, javascript, confirm, expected, coverage, M29" coverage="33"
+          expectedException="java.lang.AssertionError">
+        <navigate to="http://localhost:${jetty.port}/test/alertPage.html"/>
+        <webelement id="prompt" action="isExists" showAlert="false"/>
+        <dialog action="typeText" textToType="prompt"/>
+        <webelement id='booleanText' action="isContainsText" text="prompt"/>
+    </test>
+
+    <test name="Test unhandled alert" description="Должно быть исключение, но его нет. Зато оно есть в логах."
+          tags="base, javascript, confirm, expected, coverage, M29" coverage="33">
+        <navigate to="http://localhost:${jetty.port}/test/alertPage.html"/>
+        <webelement id="prompt" action="click" showAlert="false"/>
+        <webelement id='booleanText' action="isExists"/>
+    </test>
+
+</testcase>

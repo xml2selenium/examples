@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	tags="framework, upload, M11, M12">
+
+	<import name="i" resource="ImportWithUpload.xml"/>
+	
+	<test name="Upload resource" tags="upload, M11">
+		<navigate to="http://localhost:${jetty.port}/test/upload.html" />
+        
+        <upload id="fileUpload" resource="resource-file"/>
+        <upload id="fileUpload" action="isContainsText" text="resource-file"/>
+	</test>
+	
+	<test name="Upload resource from variable" tags="upload, M11">
+		<variable ref="resource" value="resource-file"/>
+		
+		<navigate to="http://localhost:${jetty.port}/test/upload.html" />
+        
+        <upload id="fileUpload" resource="${resource}"/>
+        <upload id="fileUpload" action="isContainsText" text="${resource}"/>
+	</test>
+	
+	<test name="Upload not existent resource" tags="upload, negative, M11"
+			expected="error" where="errorElement"
+			expectedException="org.jazzteam.xml2selenium.core.exceptions.FrameworkException"
+			expectedMessage="Cannot find resource by path 'not-existent-resource'">
+		<navigate to="http://localhost:${jetty.port}/test/upload.html" />
+        
+        <upload ref="errorElement" id="fileUpload" resource="not-existent-resource"/>
+	</test>
+	
+	<test name="Upload resource from import" tags="upload, M11">
+		<navigate to="http://localhost:${jetty.port}/test/upload.html" />
+        
+        <upload extends="i:upload"/>
+        <upload extends="i:upload" action="isContainsText" text="${uploadingFile}"/>
+	</test>
+	
+	<test name="Use upload from frame" tags="upload, M12">
+		<navigate to="http://localhost:${jetty.port}/test/upload.html" />
+		
+		<frame>
+			<upload id="fileUpload" resource="resource-file"/>
+		</frame>
+		<upload id="fileUpload" action="isContainsText" text="resource-file"/>
+	</test>
+	
+	<test name="Use upload from frame with inheritance" tags="upload, M12">
+		<navigate to="http://localhost:${jetty.port}/test/upload.html" />
+		
+		<frame ref="f1">
+			<upload ref="u1" id="fileUpload" resource="resource-file"/>
+		</frame>
+		<upload id="fileUpload" action="isContainsText" text="resource-file"/>
+		
+		<frame extends="f1"/>
+		<upload id="fileUpload" action="isContainsText" text="resource-file"/>
+	</test>
+	
+	<test name="Use upload from frame in import" tags="upload, M12">
+		<navigate to="http://localhost:${jetty.port}/test/upload.html" />
+		
+		<frame extends="i:uploadInFrameFromImport"/>
+		<upload id="fileUpload" action="isContainsText" text="${uploadingFile}"/>
+	</test>
+</testcase>

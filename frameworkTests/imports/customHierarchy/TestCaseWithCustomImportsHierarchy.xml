@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<import name="a" resource="ImportA.xml" />
+	<import name="c" resource="ImportC.xml" />
+
+	<test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html" />
+	</test>
+</testcase>

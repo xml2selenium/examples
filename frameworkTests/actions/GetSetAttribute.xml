@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines Routines.xsd"
+	tags="get, set attribute">
+
+	<test name="Get and set attribute base check" >
+		<navigate to="http://localhost:${jetty.port}/test/actions/getSetAttribute.html" />
+		
+		<!-- Read attribute which is just id of element -->
+		<button action="isExists" id="button" />
+		<webelement action="getAttribute" id="button" text="id" returnValueName="oldAttrValue"/>
+		
+		<!-- Set it to input, and then check that it is correct -->
+        <field id="textField" ref="input" textToType="${oldAttrValue}"/>
+        <field extends="input" action="isContainsText" text="button"/>
+
+
+		<!-- Read alt attribute  of element -->
+		<button action="isExists" id="button" />
+		<webelement action="getAttribute" id="button" text="alt" returnValueName="oldAttrValue1"/>
+		
+		<!-- Set it to input, and then check that it is correct -->
+        <field extends="input" textToType="${oldAttrValue1}"/>
+        <field extends="input" action="isContainsText" text="This is alt attribute"/>
+        
+        <!-- Set attribute, then read and check it is correctly set -->
+        <variable ref="newAttributeValue" value="New Value For Alt"/>
+		<webelement action="setAttribute" id="button" text="alt:${newAttributeValue}"/>
+		<webelement action="getAttribute" id="button" text="alt" returnValueName="oldAttrValue2"/>
+        <field extends="input" textToType="${oldAttrValue2}"/>
+        <field extends="input" action="isContainsText" text="${newAttributeValue}"/>
+		
+	</test>
+</testcase>

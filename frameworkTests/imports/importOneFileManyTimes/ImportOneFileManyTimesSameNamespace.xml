@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	expectedException="java.lang.IllegalStateException"
+	tags="framework, imports, negative, importOneFileManyTimes">
+	
+	<!-- TODO[kslisenko] to allow this case we need to reimplement imports architecture. Do we really need this? -->
+	
+    <import resource="Import1.xml" name="appElements" />
+    <import resource="Import1.xml" name="appElements" />
+	<!--
+		ID: 19
+		TODO add more specified expected conditions
+	-->    
+	<test
+		expected="error" 
+		name="Import single file many times [same namespace] [19]"
+		tags="imports, negative">
+
+	    <navigate extends="appElements:basicLogin"></navigate>
+        
+        <field extends="appElements:loginName" textToType="someLogin" />
+        <field  extends="appElements:loginPwd" textToType="SomePassword" />
+        <button extends="appElements:checkLoginButton"/>
+        <button extends="appElements:loginButton" />
+
+        <button id="search" />
+        <webelement id="orderItem" action="isExists" />
+	</test>
+</testcase>

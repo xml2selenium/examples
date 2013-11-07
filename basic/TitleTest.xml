@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../xml2selenium-plugin-tag/xml2selenium-base-tag/src/main/resources/xml2selenium.xsd"
+		  description="Testcase for check title tag" 	
+		  tags="title, M26">
+		  
+	<import resource="title/Title.xml" name="title"/>	
+	
+	<test name="Check title tag" description="Check actual content tag title"
+		  tags="title, M26">		
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>        		
+		<frame extends="title:checkTitle">
+			<variable ref="expectedTitle" value="This is html page for testing POC of xml test framework."/>
+		</frame>
+	</test> 
+		  
+</testcase>	

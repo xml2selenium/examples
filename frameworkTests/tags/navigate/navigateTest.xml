@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+          description="Basic test for navigate tag" tags="framework, navigate">
+
+    <import name="elements" resource="ImportWithNavigate.xml"/>
+
+    <test name="import navigate to file" tags="navigate" expectedException="FrameworkWebDriverException">
+        <navigate extends="elements:file"/>
+    </test>
+
+    <test name="import navigate with filled atribute 'to' test" tags="navigate">
+        <navigate extends="elements:nav1"/>
+        <webelement id="loginInput" action="isExists"/>
+    </test>
+
+    <test name="import navigate with unfilled atribute 'to' test" tags="navigate"
+          expectedMessage="Argument 'to' in navigate element can not be empty."
+          expectedException="FrameworkWebDriverException">
+        <navigate extends="elements:unfilled_nav"/>
+        <webelement id="loginInput" action="isExists"/>
+    </test>
+
+    <test name="import navigate with filled ssl url" tags="navigate">
+        <navigate extends="elements:ssl"/>
+    </test>
+
+    <test name="import navigate with 404 code page" tags="navigate" expectedException="FrameworkWebDriverException">
+        <navigate extends="elements:404"/>
+    </test>
+
+    <test name="import navigate with 404 code page on server" tags="navigate">
+        <navigate extends="elements:404onServer" expected404page="true"/>
+    </test>
+
+</testcase>

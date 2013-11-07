@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd">
+	<import resource="Import.xml" name="true_id" />
+
+	<test name="regist" tags="registration, M11" description="registration user">
+		<navigate extends="true_id:demoReg" />
+		<frame extends="true_id:Reg" />
+	</test>
+</testcase>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
+	<import resource="ThirdImport.xml" name="i" />
+	
+	<frame ref="frameFromSecondImport" extends="i:nonExistFrameFromThirdImport"/>	
+	
+	<frame ref="frmWithNonExistElement">
+		<button extends="i:button" />
+	</frame>
+
+</imports>

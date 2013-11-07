@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines Routines.xsd"
+	tags="framework, action, processor">
+
+	<test name="Check that exists element is not exists" expected="fail" tags="actions, isNotExists"
+		expectedException="java.lang.AssertionError" expectedMessage="Element with 'id=search' is exists">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<button action="isNotExists" id="search" />
+	</test>
+
+	<test name="Check that not exists element is not exists" expected="success"
+		tags="actions, isNotExists">
+		<navigate to="http://localhost:${jetty.port}/test/specialSearch.html" />
+		<button action="isNotExists" id="somebuttons" />
+	</test>
+
+
+
+</testcase>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	Test-cases for expected exceptions functionality:
+	1. Check expectedException
+	2. Check expectedMessage
+	3. Check, on which element test failed 
+	4. Test expected=fail, success, error
+	
+	This test-case checks expected conditions in combined cases (expceted + expectedException, where + expectedException, ...)
+ -->
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd">
+	<test name="1_Expected_message_[negative]" expectedMessage="wrong message">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>
+			
+	<test name="2_Expected_expected_expectedException" expected="error" expectedException="FrameworkException">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>
+	
+	<test name="3_Expected_expected_success_expectedException_[negative]" expected="success" expectedException="FrameworkException">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>	
+	
+	<test name="4_Expected_expected_expectedMessage" expected="error" expectedMessage="Unknown action [nonExistsAction] for element Webelement">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>	
+	
+	<test name="5_Expected_expected_expectedException_expectedMessage" expected="error" expectedMessage="Unknown action [nonExistsAction] for element Webelement" expectedException="FrameworkException">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>		
+	
+	<test name="6_Expected_expected_where_expectedException_expectedMessage" expected="error" expectedMessage="Unknown action [nonExistsAction] for element Webelement" expectedException="FrameworkException" where="fail1">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>	
+	
+	<test name="7_Expected_expected_success_where_expectedException_expectedMessage_[negative]" expected="success" expectedMessage="Unknown action [nonExistsAction] for element Webelement" expectedException="FrameworkException" where="fail1">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>		
+	
+	<test name="8_Expected_expected_expectedException_[negative]" expected="error" expectedException="FrameworkException111">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>
+	
+	<test name="9_Expected_expected_expectedMessage_[negative]" expected="error" expectedMessage="wrong message">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>	
+	 
+	<test name="10_Expected_expected_expectedException_expectedMessage_[negative]" expected="error" expectedMessage="wrong message" expectedException="wrong exception">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>
+			
+	<test name="11_Expected_expected_where_expectedException_expectedMessage_[negative]" expected="error" expectedMessage="wrong message" expectedException="FrameworkException" where="fail222">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>		
+	
+	<test name="12_Expected_expected_success_where[wrong_element]_expectedException_expectedMessage_[negative]" expected="success" expectedMessage="wrong message" expectedException="FrameworkException" where="fail222">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>	
+	
+	<test name="13_Expected_where_success_expectedException" expected="success" expectedException="FrameworkException" where="fail1">
+	    <navigate to="http://localhost:${jetty.port}/test/login.html" />
+	    <webelement ref="fail1" id="loginInput" action="nonExistsAction"/>
+	</test>
+</testcase>

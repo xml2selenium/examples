@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines ../../../../../main/resources/Routines.xsd"
+	description="Testcase for testing situation when test name have the wrong symbol"
+	tags="framework, wrong symbols" >
+
+	<test name="Name of test has / wrong symbols"/>
+		
+	<test name="Name of test has \ wrong symbols"/>
+	
+	<test name="Name of test has :  wrong symbols"/>
+	
+	<test name="Name of test has * wrong symbols"/>
+	
+	<test name="Name of test has ? wrong symbols"/>
+
+	<test name="Name of test has | wrong symbols"/>
+	
+	<test name="Name of test has # wrong symbols"/>
+	
+	<test name="Name of test has ( wrong symbols"/>
+	
+	<test name="Name of test has ) wrong symbols"/>
+	
+</testcase>
+
+

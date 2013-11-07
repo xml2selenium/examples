@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	description="Test case for bug 266" tags="base, simple, M25, #266">
+
+	<test name="Use assert tag for run framework in junit test" tags="assert, M25, #266">
+		<assert first="" action="isEmpty" />
+	</test>
+</testcase>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<imports xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
+	<before ref="before">
+		<navigate to="http://localhost:${jetty.port}/test"/>
+		<field id="loginInput" textToType="lgn"/>
+		<field id="passwordInput" textToType="passwd"/>
+	</before>
+	
+	<after ref="after">
+		<button subId="LoginBtn"/>
+		<webelement id="search" action="isExists"/>
+	</after>
+	
+	<before ref="beforeWithProperties">
+		<property name="props" resource="before.properties"/>
+	</before>
+</imports>

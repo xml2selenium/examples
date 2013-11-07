@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><root><TestCase><Test/><Test><navigate to="http://localhost:${jetty.port}/test/login.html"/><find id="loginInput"/></Test><Test/><Test><navigate to="https://failurl"/></Test><Test/><Test><navigate to="http://localhost:${jetty.port}/test/404.html"/></Test></TestCase></root>

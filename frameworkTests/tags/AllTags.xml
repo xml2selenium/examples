@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testcase xmlns="http://www.jazzteam.org/Routines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.jazzteam.org/Routines Routines.xsd"
+	tags="framework">
+
+	<!-- 
+		using variables 
+		ID: 32
+	-->
+	<test name="Variables test [32]" tags="variable">
+		<variable ref="host" value="localhost" />
+		
+		<navigate to="http://${host}:${jetty.port}/test/login.html"/>
+
+		<field ref="login" id="loginInput" textToType="someLogin" />
+		<field ref="password" id="passwordInput" textToType="SomePassword" />
+		<button ref="doLogin" id="DoLoginBtn" />
+
+		<button id="search" />
+		<webelement id="orderItem" action="isExists" />
+	</test>	
+
+	<!-- 
+		Field, Button, Frame, WebElement
+		ID: 21, 22, 24, 30
+	 -->
+	 <!-- 
+	<test>
+		<navigate to="http://localhost:${jetty.port}/test/login.html"/>
+
+		<field ref="login" id="loginInput" textToType="someLogin" />
+		<field ref="password" id="passwordInput" textToType="SomePassword" />
+		<button ref="doLogin" id="DoLoginBtn" />
+
+		<button id="search" />
+		<webelement id="orderItem" action="isExists" />
+
+	    <frame ref="AppLogin">
+	        <field extends="login" />
+	        <field extends="password" />
+	        <button extends="doLogin" />
+	    </frame>
+    
+    	<webelement id="orderItem" action="isExists"/>
+	</test>
+	 -->	
+</testcase>
